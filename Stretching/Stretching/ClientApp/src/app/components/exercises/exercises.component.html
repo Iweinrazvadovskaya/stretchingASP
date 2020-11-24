@@ -1,0 +1,34 @@
+<h1>Exercises </h1>
+
+<p *ngIf="!exerciseTranslations"><b>Loading...</b></p>
+
+<table class="table " *ngIf="exerciseTranslations">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>name</th>
+            <th>description</th>
+            <th>preview</th>
+            <th>video</th>
+            <th>language</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let exercise of exerciseTranslations">
+            <td>{{exercise.id}}</td>
+            <td>{{exercise.name}}</td>
+            <td>{{exercise.description}}</td>
+            <td><img width="320" height="220" class="image-exercise" src="{{exercise.preview}}"/> </td>
+            <td>
+                <video width="320" height="240" controls>
+                    <source src="{{'https://dm3yxr1fx7bnn.cloudfront.net/exercise/video/' + exercise.video}}" type="video/mp4">
+                  Your browser does not support the video tag.
+                  </video>
+            </td>
+            <td>{{exercise.language}}</td>
+
+        </tr>
+    </tbody>
+</table>
+<p>exercises works!</p>
