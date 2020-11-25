@@ -1,5 +1,6 @@
 import { transition } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ExerciseService } from 'src/app/services/exercise.service';
 
 @Component({
@@ -11,19 +12,13 @@ export class ExercisesComponent implements OnInit {
  // public exercises: Exercise[] = [];
 //public translations: Translation[] = [];
   public exerciseTranslations: ExerciseTranslation[] = [];
-  constructor(private service: ExerciseService) { }
+
+
+  constructor(private service: ExerciseService, private _router: Router) { }
 
   ngOnInit() {
     this.service.getAllExercises().subscribe(data => {
       this.exerciseTranslations = data;
     })
-
-    // this.service.getAllExercises().subscribe(data => {
-    //   this.exercises = data;
-    // })
-
-    // if(this.exercises.length > 0 && this.translations.length > 0){
-    //  }
   }
-
 }

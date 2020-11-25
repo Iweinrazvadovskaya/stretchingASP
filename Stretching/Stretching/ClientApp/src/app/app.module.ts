@@ -9,6 +9,7 @@ import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { HomeComponent } from './components/home/home.component';
 import { ExercisesComponent } from './components/exercises/exercises.component';
 import { ExerciseService } from './services/exercise.service';
+import { NewExerciseComponent } from './components/new-exercise/new-exercise.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,9 @@ import { ExerciseService } from './services/exercise.service';
     NavMenuComponent,
     HomeComponent,
 
-    ExercisesComponent
+    ExercisesComponent,
+
+    NewExerciseComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -25,6 +28,7 @@ import { ExerciseService } from './services/exercise.service';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'exercises', component: ExercisesComponent },
+      { path: 'new-exercise', component: NewExerciseComponent }
     ])
   ],
   providers: [ExerciseService],
