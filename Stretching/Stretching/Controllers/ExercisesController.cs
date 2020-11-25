@@ -26,15 +26,16 @@ namespace Stretching.Controllers
         public async Task<ActionResult<IEnumerable<Object>>> Getstretching_exercise()
         {
             var listTrEx = from a in _context.stretching_exercise
-                                              join p in _context.exercise_translation_entity on a.id equals p.parent_id where p.lang == "ru"
-                                              select new
+                                              join p in _context.exercise_translation_entity on a.id equals p.parent_id where p.lang == "ru" || p.lang == "en"
+                           select new
                                               {
                                                   id = a.id,
                                                   name = p.name,
                                                   description = p.description,
                                                   preview = a.preview_url,
-                                                  video = a.video_url,
-                                                  language = p.lang
+                                                  video_url = a.video_url,
+                                                  lang = p.lang,
+                                                  short_name = a.short_name
                                               };
             return await listTrEx.ToListAsync();
         }
@@ -94,7 +95,7 @@ namespace Stretching.Controllers
             _context.stretching_exercise.Add(exercise);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetExercise", new { id = exercise.id }, exercise);
+            return CreatedAtAction("GetExercise", null, exercise);
         }
 
         // DELETE: api/Exercises/5

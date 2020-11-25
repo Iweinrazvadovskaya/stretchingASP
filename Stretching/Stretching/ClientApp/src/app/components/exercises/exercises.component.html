@@ -1,20 +1,20 @@
-<h1>Exercises </h1>
+<h1>Упражнения</h1>
 
 <p *ngIf="!exerciseTranslations"><b>Loading...</b></p>
 
 <div>
-    <button class="btn btn-success" [routerLink]="'../new-exercise'">Add exercise</button>
+    <button style="margin: 10px;" class="btn btn-success" [routerLink]="'../new-exercise'">Add exercise</button>
 </div>
 <table class="table " *ngIf="exerciseTranslations">
     <thead>
         <tr>
             <th>Id</th>
-            <th>name</th>
-            <th>description</th>
-            <th>preview</th>
-            <th>video</th>
-            <th>language</th>
-            <th>Actions</th>
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Превью</th>
+            <th>Видео</th>
+            <th>Язык</th>
+            <th>Действия</th>
         </tr>
     </thead>
     <tbody>
@@ -25,15 +25,15 @@
             <td><img width="300" height="180" class="image-exercise" src="{{exercise.preview}}"/> </td>
             <td>
                 <video width="300" height="180" controls>
-                    <source src="{{'https://dm3yxr1fx7bnn.cloudfront.net/exercise/video/' + exercise.video}}" type="video/mp4">
+                    <source src="{{'https://dm3yxr1fx7bnn.cloudfront.net/exercise/video/' + exercise.video_url}}" type="video/mp4">
                   Your browser does not support the video tag.
                   </video>
             </td>
-            <td>{{exercise.language}}</td>
+            <td>{{exercise.lang}}</td>
             <td>
-                <button width="60" height="20" class="btn btn-success">Edit exercise</button>
+                <button style="margin: 10px;" width="60" height="20" class="btn btn-success">Edit exercise</button>
                 <br>
-                <button width="60" height="20"  class="btn btn-success">Delete exercise</button>
+                <button style="margin: 10px;" width="60" height="20"  class="btn btn-success">Delete exercise</button>
             </td>
         </tr>
     </tbody>

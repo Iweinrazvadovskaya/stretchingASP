@@ -1,33 +1,18 @@
 <div class="add-exercise">
-<form action="">
+<form [formGroup]="addExerciseForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-        <label for="name">Название</label>
-        <input type="text" class="form-control" id="name" placeholder="Название упражнения"/>
-    </div>
-
-    <div class="form-group">
-        <label for="description">Описание</label>
-        <input type="text" class="form-control" id="description" placeholder="Описание упражнения"/>
-    </div>
-
-    <div class="form-group">
-        <label for="lang">Язык</label>
-        <input type="text" class="form-control" id="lang" placeholder="Язык (для примера ru)"/>
-    </div>
-
-    <div class="form-group">
-        <label for="preview">Превью</label>
-        <input type="text" class="form-control" id="preview" placeholder="Ссылка на превью упражнения (полная)"/>
+        <label for="preview_url">Превью</label>
+        <input type="text" class="form-control" id="preview_url" formControlName="preview_url" placeholder="Ссылка на превью упражнения (полная)"/>
     </div>
 
     <div class="form-group">
         <label for="video_url">Видео</label>
-        <input type="text" class="form-control" id="video_url" placeholder="Название видео упражнения (с расширением)"/>
+        <input type="text" class="form-control" id="video_url" formControlName="video_url" placeholder="Название видео упражнения (с расширением)"/>
     </div>
 
     <div class="form-group">
         <label for="short_name">Сокращенное имя</label>
-        <input type="text" class="form-control" id="short_name" placeholder="Сокращенное имя упражнения"/>
+        <input type="text" class="form-control" id="short_name" formControlName="short_name" placeholder="Сокращенное имя упражнения"/>
     </div>
 
     <button class="btn btn-success" [routerLink]="'/new-exercise'"> Добавить </button>

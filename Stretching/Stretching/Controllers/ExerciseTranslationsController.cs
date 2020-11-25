@@ -82,7 +82,7 @@ namespace Stretching.Controllers
         {
             _context.exercise_translation_entity.Add(exerciseTranslation);
             await _context.SaveChangesAsync();
-
+            var ex = exerciseTranslation;
             return CreatedAtAction("GetExerciseTranslation", new { id = exerciseTranslation.t_id }, exerciseTranslation);
         }
 
