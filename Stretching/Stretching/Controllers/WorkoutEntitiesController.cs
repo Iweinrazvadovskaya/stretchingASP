@@ -23,33 +23,35 @@ namespace Stretching.Controllers
 
         // GET: api/WorkoutEntities
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<WorkoutEntity>>> Getworkout_entity()
+        public async Task<ActionResult<IEnumerable<Object>>> Getworkout_entity()
         {
-            var listTrEx = from a in _context.stretching_exercise
-                           join p in _context.exercise_translation_entity on a.id equals p.parent_id
-                           where p.lang == "ru"
-                           select new
-                           {
-                               id = a.id,
-                               name = p.name,
-                               description = p.description,
-                               preview = a.preview_url,
-                               video = a.video_url,
-                               language = p.lang
-                           };
 
-            var listWorkouts = from a in listTrEx
-                               join p in _context.workout_entity on a.id equals p.exercise_id
+            /*  var fullEntries = (from ep in _context.workout_entity
+                                 join e in _context.stretching_exercise on ep.exercise_id equals e.id
+                                 join t in _context.exercise_translation_entity on e.id equals t.parent_id
+                                 join p in _context.stretching_program on ep.program_id equals p.p_id
+                                 select new
+                                 {
+                                     w_id = ep.w_id,
+                                     day = ep.day,
+                                     name = t.name,
+                                     description = t.description,
+                                     preview = e.preview_url,
+                                     video_url = e.video_url,
+                                     lang = t.lang,
+                                     short_name = e.short_name,
+                                     program_name = p.program_name,
+                                     p_id = p.p_id
+
+                                 }); */
+
+
+            var fullEntries = (from ep in _context.workout_entity
                                select new
                                {
-                                   id = a.id,
-                                   name = a.name,
-                                   description = a.description,
-                                   preview = a.preview,
-                                   video = a.video,
-                                   language = a.language
-                           };
-            return await _context.workout_entity.ToListAsync();
+                                   day = ep.day
+                               });
+            return await fullEntries.ToListAsync();
         }
 
         // GET: api/WorkoutEntities/5
@@ -65,6 +67,23 @@ namespace Stretching.Controllers
 
             return workoutEntity;
         }
+
+/*        [Route("GetDayByProgram")]
+        [HttpGet("{name}")]
+        public async Task<ActionResult<WorkoutEntity>> GetDayByProgram(int name)
+        {
+            var workoutEntity = await _context.workout_entity.FirstOrDefaultAsync(p => p.program_id == program_i); ;
+
+            if (workoutEntity == null)
+            {
+                return NotFound();
+            }
+
+            return workoutEntity;
+        }*/
+
+
+    
 
         // PUT: api/WorkoutEntities/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for

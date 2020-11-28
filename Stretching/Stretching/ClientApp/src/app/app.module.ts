@@ -11,6 +11,7 @@ import { ExercisesComponent } from './components/exercises/exercises.component';
 import { ExerciseService } from './services/exercise.service';
 import { NewExerciseComponent } from './components/new-exercise/new-exercise.component';
 import { NewTranslationComponent } from './components/new-translation/new-translation.component';
+import { WorkoutsComponent } from './components/workouts/workouts.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,9 @@ import { NewTranslationComponent } from './components/new-translation/new-transl
 
     NewExerciseComponent,
 
-    NewTranslationComponent
+    NewTranslationComponent,
+
+    WorkoutsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -33,7 +36,9 @@ import { NewTranslationComponent } from './components/new-translation/new-transl
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'exercises', component: ExercisesComponent },
       { path: 'new-exercise', component: NewExerciseComponent },
-      { path: 'new-translation', component: NewExerciseComponent }
+      { path: 'new-translation', component: NewExerciseComponent },
+      { path: 'workouts', component: WorkoutsComponent }
+
     ])
   ],
   providers: [ExerciseService],

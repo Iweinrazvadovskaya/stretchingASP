@@ -1,0 +1,15 @@
+<h1>Упражнения</h1>
+
+<p *ngIf="!workouts"><b>Loading...</b></p>
+
+<div>
+    <button style="margin: 10px;" class="btn btn-success" [routerLink]="'../new-exercise'">Add exercise</button>
+</div>
+<div class="table " *ngIf="workouts">
+
+        <div *ngFor="let workout of workouts">
+            <button class="card">{{workout.day}}</button>
+        </div>
+
+</div>
+<p>exercises works!</p>
