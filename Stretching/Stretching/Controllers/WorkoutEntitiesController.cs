@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Stretching.Context;
 using Stretching.MVC.Models;
 
@@ -25,27 +26,6 @@ namespace Stretching.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Object>>> Getworkout_entity()
         {
-
-            /*  var fullEntries = (from ep in _context.workout_entity
-                                 join e in _context.stretching_exercise on ep.exercise_id equals e.id
-                                 join t in _context.exercise_translation_entity on e.id equals t.parent_id
-                                 join p in _context.stretching_program on ep.program_id equals p.p_id
-                                 select new
-                                 {
-                                     w_id = ep.w_id,
-                                     day = ep.day,
-                                     name = t.name,
-                                     description = t.description,
-                                     preview = e.preview_url,
-                                     video_url = e.video_url,
-                                     lang = t.lang,
-                                     short_name = e.short_name,
-                                     program_name = p.program_name,
-                                     p_id = p.p_id
-
-                                 }); */
-
-
             var fullEntries = (from ep in _context.workout_entity
                                select new
                                {
@@ -68,22 +48,57 @@ namespace Stretching.Controllers
             return workoutEntity;
         }
 
-/*        [Route("GetDayByProgram")]
-        [HttpGet("{name}")]
-        public async Task<ActionResult<WorkoutEntity>> GetDayByProgram(int name)
+        /*        [Route("GetDayByProgram")]
+                [HttpGet("{name}")]
+                public async Task<ActionResult<WorkoutEntity>> GetDayByProgram(int name)
+                {
+                    var workoutEntity = await _context.workout_entity.FirstOrDefaultAsync(p => p.program_id == program_i); ;
+
+                    if (workoutEntity == null)
+                    {
+                        return NotFound();
+                    }
+
+                    return workoutEntity;
+                }*/
+
+        [HttpGet("program")]
+        public List<int> GetProgramm(int id)
         {
-            var workoutEntity = await _context.workout_entity.FirstOrDefaultAsync(p => p.program_id == program_i); ;
+            return _context.workout_entity.Where(o => o.program_id == id).Select(o => o.day).Distinct().OrderBy(o => o).ToList();
+        }
 
-            if (workoutEntity == null)
-            {
-                return NotFound();
-            }
-
-            return workoutEntity;
-        }*/
-
-
-    
+        [HttpGet("workout")]
+        public string GetWorkoutByProgramAndDay(int program, int day)
+        {
+            return JsonConvert.SerializeObject(_context.workout_entity
+                .Join(_context.stretching_exercise,
+                    w => w.exercise_id,
+                    e => e.id,
+                    (w, e) => new { w, e})
+                .Join(_context.exercise_translation_entity,
+                    w => w.e.id, tr => tr.parent_id, (w, tr) => new { w.e, w.w, tr})
+                .Join(_context.stretching_program,
+                w => w.w.program_id, pr => pr.p_id, (w, pr) => new { w.w, w.e, w.tr, pr})
+                .Select(
+                 workout_exercise => new
+                 {
+                     day = workout_exercise.w.day,
+                     sequence = workout_exercise.w.sequence,
+                     time = workout_exercise.w.repeats,
+                     preview_url = workout_exercise.e.preview_url,
+                     exercise_id = workout_exercise.w.exercise_id,
+                     video_url = workout_exercise.e.video_url,
+                     short_name = workout_exercise.e.short_name,
+                     name = workout_exercise.tr.name,
+                     language = workout_exercise.tr.lang,
+                     description = workout_exercise.tr.description,
+                     program_name = workout_exercise.pr.program_name,
+                     program_id = workout_exercise.pr.p_id
+                 }
+                ).Where(o => o.program_id == program && o.day == day && o.language == "ru").OrderBy(o => o.sequence)
+                .ToList());
+        }
 
         // PUT: api/WorkoutEntities/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for

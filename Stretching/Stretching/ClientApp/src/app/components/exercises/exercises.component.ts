@@ -21,4 +21,10 @@ export class ExercisesComponent implements OnInit {
       this.exerciseTranslations = data;
     })
   }
+
+  deleteExercise(id: number){
+    this.service.deleteExercise(id).subscribe(data => {
+      this._router.navigate(["/exercises"])
+    })
+  }
 }

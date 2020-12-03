@@ -3,12 +3,12 @@
 <p *ngIf="!exerciseTranslations"><b>Loading...</b></p>
 
 <div>
-    <button style="margin: 10px;" class="btn btn-success" [routerLink]="'../new-exercise'">Add exercise</button>
+    <button style="margin: 10px; background-color: #6864cb; border-color: #6864cb; " class="btn btn-success" [routerLink]="'../new-exercise'">Добавить упражнение</button>
 </div>
 <table class="table " *ngIf="exerciseTranslations">
     <thead>
         <tr>
-            <th>Id</th>
+            <th>Очередь</th>
             <th>Название</th>
             <th>Описание</th>
             <th>Превью</th>
@@ -22,7 +22,7 @@
             <td>{{exercise.id}}</td>
             <td>{{exercise.name}}</td>
             <td>{{exercise.description}}</td>
-            <td><img width="300" height="180" class="image-exercise" src="{{exercise.preview}}"/> </td>
+            <td><img width="300" height="180" class="image-exercise" src="{{exercise.preview_url}}"/> </td>
             <td>
                 <video width="300" height="180" controls>
                     <source src="{{'https://dm3yxr1fx7bnn.cloudfront.net/exercise/video/' + exercise.video_url}}" type="video/mp4">
@@ -31,9 +31,9 @@
             </td>
             <td>{{exercise.lang}}</td>
             <td>
-                <button style="margin: 10px;" width="60" height="20" class="btn btn-success">Edit exercise</button>
+                <button style="margin: 10px; background-color: #6864cb; border-color: #6864cb; " width="60" height="20" class="btn btn-success">Отредактировать</button>
                 <br>
-                <button style="margin: 10px;" width="60" height="20"  class="btn btn-success">Delete exercise</button>
+                <button (click)="deleteExercise(exercise.id)" style="margin: 10px; background-color: red; border-color: red;" width="60" height="20"  class="btn btn-success">Удалить упражнение</button>
             </td>
         </tr>
     </tbody>

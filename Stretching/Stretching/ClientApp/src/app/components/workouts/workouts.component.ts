@@ -9,14 +9,18 @@ import { WorkoutsService } from 'src/app/services/workouts.service';
   styleUrls: ['./workouts.component.css']
 })
 export class WorkoutsComponent implements OnInit {
-  public workouts: WorkoutNumber[] = [];
+  public workoutsLiteDay: number[] = [];
+  public workoutsProDay: number[] = [];
 
   constructor(private service: WorkoutsService, private _router: Router) { }
 
   ngOnInit() {
-    this.service.getAllWorkouts().subscribe(data => {
-      this.workouts = data;
+    this.service.getWorkoutsByProgram(1).subscribe(data => {
+      this.workoutsLiteDay = data;
+    })
+
+    this.service.getWorkoutsByProgram(2).subscribe(data => {
+      this.workoutsProDay = data;
     })
   }
-
 }

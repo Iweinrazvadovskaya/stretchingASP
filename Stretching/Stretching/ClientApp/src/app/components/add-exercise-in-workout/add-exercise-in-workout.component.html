@@ -1,0 +1,28 @@
+<p *ngIf="!exercisesNames"><b>Loading...</b></p>
+
+
+<form [formGroup]="addExerciseForm">
+
+    
+ <div  *ngIf="exercisesNames" style="width:200px;">
+    <select (change)="selectOption($event.target.value)"
+    [(ngModel)]="selectedExercise">
+    <option [value]="item.exercise_id" *ngFor="let item of exercisesNames">{{item.short_name}}</option>
+     </select>
+</div>
+
+    <div class="form-group">
+        <label >Очередь упражнения воркауте {{lastId + 1}}</label>
+    </div>
+    
+<div class="form-group">
+    <label for="repeats">Время</label>
+    <input type="text" class="form-control" id="repeats" formControlName="repeats" placeholder="Время длительности упражнения"/>
+</div>
+
+<button class="btn btn-success" (click)="add()"> Добавить </button>
+<button class="btn btn-default" [routerLink]="'/exercises'"> Отменить </button>
+
+</form>
+
+

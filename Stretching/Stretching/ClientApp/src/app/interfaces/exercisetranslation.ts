@@ -4,7 +4,7 @@ interface ExerciseTranslation{
     name: string;
     description: string;
     lang: string;
-    preview: string;
+    preview_url: string;
     video_url: string;
     short_name: string;
 }

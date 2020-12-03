@@ -1,6 +1,6 @@
 <div class="add-exercise">
 
-  <form [formGroup]="addTranslationForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="addExerciseForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
         <label for="name">Название</label>
         <input type="text" class="form-control" id="name" formControlName="name" placeholder="Название упражнения"/>
@@ -15,9 +15,6 @@
         <label for="lang">Язык</label>
         <input type="text" class="form-control" id="lang" formControlName="lang" placeholder="Язык (для примера ru)"/>
     </div>
-</form>
-
-  <form [formGroup]="addExerciseForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="preview_url">Превью</label>
       <input type="text" class="form-control" id="preview_url" formControlName="preview_url" placeholder="Ссылка на превью упражнения (полная)" />

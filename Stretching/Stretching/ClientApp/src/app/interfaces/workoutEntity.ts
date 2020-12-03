@@ -1,9 +1,5 @@
 
-// interface ExerciseTranslation{
-//     id: number;
-//     name: string;
-//     repeats: Repeats;
-//     preview: string;
-//     video: string;
-//     language: string;
-// }
+interface ExerciseNames{
+    exercise_id: string;
+    short_name: string;
+}

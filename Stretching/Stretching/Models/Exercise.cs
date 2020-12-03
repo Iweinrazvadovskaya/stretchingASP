@@ -8,10 +8,10 @@ namespace Stretching.MVC.Models
 {
     public class Exercise
     {
+
         [Key] public int id { get; set; }
         public string preview_url { get; set; }
         public string video_url { get; set; }
         public string short_name { get; set; }
-        public int is_warmup { get; set; }
     }
 }

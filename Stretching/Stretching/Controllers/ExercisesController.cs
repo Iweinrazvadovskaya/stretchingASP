@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Stretching.Context;
+using Stretching.Models.ModelsDto;
 using Stretching.MVC.Models;
 
 namespace Stretching.Controllers
@@ -23,21 +26,38 @@ namespace Stretching.Controllers
 
         // GET: api/Exercises
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Object>>> Getstretching_exercise()
+        public IEnumerable<Object> Getstretching_exercise()
         {
             var listTrEx = from a in _context.stretching_exercise
-                                               join p in _context.exercise_translation_entity on a.id equals p.parent_id where p.lang == "ru"
+                                               join p in _context.exercise_translation_entity on a.id equals p.parent_id where p.lang == "ru" || p.lang == "en"
                            select new
                                               {
                                                   id = a.id,
                                                   name = p.name,
                                                   description = p.description,
-                                                  preview = a.preview_url,
+                                                  preview_url = a.preview_url,
                                                   video_url = a.video_url,
                                                   lang = p.lang,
                                                   short_name = a.short_name
                                               };
-            return await listTrEx.ToListAsync();
+            return listTrEx.ToList();
+        }
+
+
+        [HttpGet("exrciseNames")]
+        public string getExercisesNames()
+        {
+            return JsonConvert.SerializeObject(
+                 _context.stretching_exercise
+                  .Select(
+                 workout_exercise => new
+                 {
+                     exercise_id = workout_exercise.id,
+                     short_name = workout_exercise.short_name
+                 }
+                )
+                 .ToList()
+                );
         }
 
         // GET: api/Exercises/5
@@ -90,26 +110,29 @@ namespace Stretching.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Exercise>> PostExercise(Exercise exercise)
+        public void PostExercise([FromBody] ExerciseTranslatioDto dto)
         {
-            _context.stretching_exercise.Add(exercise);
-            await _context.SaveChangesAsync();
+            int id = _context.stretching_exercise.Max(o => o.id) + 1;
+            Debug.WriteLine(JsonConvert.SerializeObject(dto));
+            var newExercise = new Exercise() { id = id, preview_url = dto.preview_url, short_name = dto.short_name, video_url = dto.video_url };
+            
+            _context.stretching_exercise.Add(newExercise);
+            _context.SaveChanges();
 
-            return CreatedAtAction("GetExercise", new { id = exercise.id }, exercise);
+            //int id = _context.stretching_exercise.Where(o => o.short_name == dto.exrcise_short_name).Select(e => e.id).FirstOrDefault();
+
+            _context.exercise_translation_entity.Add(new ExerciseTranslation() { description = dto.description, lang = dto.lang, name = dto.name, parent_id = id });
+            _context.SaveChanges();
         }
 
         // DELETE: api/Exercises/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Exercise>> DeleteExercise(int id)
+        [HttpDelete]
+        public Exercise DeleteExercise(int id)
         {
-            var exercise = await _context.stretching_exercise.FindAsync(id);
-            if (exercise == null)
-            {
-                return NotFound();
-            }
+            var exercise = _context.stretching_exercise.Find(id);
 
             _context.stretching_exercise.Remove(exercise);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return exercise;
         }

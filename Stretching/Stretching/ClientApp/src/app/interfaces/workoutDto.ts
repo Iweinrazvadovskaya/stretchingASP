@@ -4,6 +4,4 @@ interface WorkoutDto {
     repeats: string;
     video_url: string;
     short_name: string;
-    is_warmup: number;
   }
-  

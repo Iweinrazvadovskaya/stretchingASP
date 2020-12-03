@@ -1,3 +1,0 @@
-interface WorkoutNumber {
-    day: number;
-  }

@@ -1,5 +1,36 @@
 .card {
     /* Add shadows to create the "card" effect */
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
+    transition: 0.5s;
   }
+
+  .container {
+    display: -webkit-flex;  /* для поддержки ранних версий браузеров */
+    display: inline-flex;
+    height: 200px;
+    align-content: space-between;
+    -webkit-flex-wrap: wrap;  /* для поддержки ранних версий браузеров */
+    flex-wrap: wrap;  /* указывает, что флекс элементы внутри контейнера располагаются в несколько горизонтальных рядов (в случае переполнения) */
+    } 
+
+    .main-div{
+      display:flex;
+    }
+
+    .button-wrap {
+      text-transform:uppercase;
+    	font-family:'Arial';
+	    font-weight:400;
+    	font-size:16px;
+      text-transform: uppercase;
+      color:white;
+      text-align: center;
+      vertical-align: middle;
+      width:150px;
+      height:150px;
+      border: 1px solid #c4c2fa; 
+      background-color: #c4c2fa; 
+      margin: 20px;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      border-radius: 15%;
+      } 
