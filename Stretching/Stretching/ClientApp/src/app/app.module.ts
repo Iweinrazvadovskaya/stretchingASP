@@ -13,6 +13,9 @@ import { WorkoutsComponent } from './components/workouts/workouts.component';
 import { WorkoutComponent } from './components/workout/workout.component';
 import { AddExerciseInWorkoutComponent } from './components/add-exercise-in-workout/add-exercise-in-workout.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSelectModule } from '@angular/material/select';
+import { NewDayComponent } from './components/new-day/new-day.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +29,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
     WorkoutComponent,
 
-    AddExerciseInWorkoutComponent
+    AddExerciseInWorkoutComponent,
+
+    NewDayComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -39,9 +44,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       { path: 'new-exercise', component: NewExerciseComponent },
       { path: 'workouts', component: WorkoutsComponent },
       { path: 'workout/:program/:day', component: WorkoutComponent },
-      { path: 'add-exercise-in-workout/:day/:program/:lastId', component: AddExerciseInWorkoutComponent } 
+      { path: 'add-exercise-in-workout/:day/:program/:lastId', component: AddExerciseInWorkoutComponent },
+      { path: 'new-day/:program/:lastDay', component: NewDayComponent }
     ]),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSelectModule
   ],
   providers: [ExerciseService],
   bootstrap: [AppComponent]

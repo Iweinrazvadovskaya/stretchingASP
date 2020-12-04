@@ -15,4 +15,6 @@ namespace Stretching.MVC.Models
         public int sequence { get; set; }
         public int day { get; set; }
     }
+
+
 }

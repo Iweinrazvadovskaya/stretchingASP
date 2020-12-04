@@ -5,4 +5,3 @@ interface Workout {
     sequence: number;
     day: number;
   }
-  

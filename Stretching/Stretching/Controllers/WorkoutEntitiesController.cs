@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Stretching.Context;
+using Stretching.Models.ModelsDto;
 using Stretching.MVC.Models;
 
 namespace Stretching.Controllers
@@ -24,14 +25,9 @@ namespace Stretching.Controllers
 
         // GET: api/WorkoutEntities
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Object>>> Getworkout_entity()
+        public async Task<ActionResult<IEnumerable<WorkoutEntity>>> Getworkout_entity()
         {
-            var fullEntries = (from ep in _context.workout_entity
-                               select new
-                               {
-                                   day = ep.day
-                               });
-            return await fullEntries.ToListAsync();
+            return await _context.workout_entity.ToListAsync();
         }
 
         // GET: api/WorkoutEntities/5
@@ -136,13 +132,28 @@ namespace Stretching.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<WorkoutEntity>> PostWorkoutEntity(WorkoutEntity workoutEntity)
+        public void PostWorkoutEntity([FromBody] WorkoutDto dto)
         {
-            _context.workout_entity.Add(workoutEntity);
-            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetWorkoutEntity", new { id = workoutEntity.w_id }, workoutEntity);
+            var workoutEntity = new WorkoutEntity() {repeats = dto.repeats, day = dto.day, exercise_id = dto.exercise_id, program_id = dto.program_id};
+
+            _context.workout_entity.Add(workoutEntity);
+            _context.SaveChanges();
+
+         //   return CreatedAtAction("GetWorkoutEntity", new { id = workoutEntity.w_id }, workoutEntity);
         }
+
+
+        /*        [HttpDelete("workoutDayDelete")]
+                public Exercise DeleteWorkoutDay(int day)
+                {
+                    var exercise = _context.stretching_exercise.Find(day);
+
+                    _context.stretching_exercise.Remove(exercise);
+                    _context.SaveChanges();
+
+                    return exercise;
+                }*/
 
         // DELETE: api/WorkoutEntities/5
         [HttpDelete("{id}")]

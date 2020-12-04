@@ -7,7 +7,7 @@
     <h3>Проффесиональный (pro)</h3>
 
     <div>
-      <button style="margin: 10px; background-color: #6864cb; border-color: #6864cb; margin: 40px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);" class="btn btn-success" [routerLink]="'../new-exercise'">Добавить день в проффесиональный</button>
+      <button style="margin: 10px; background-color: #6864cb; border-color: #6864cb; margin: 40px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);" class="btn btn-success" routerLink="/new-day/{{2}}/{{workoutsProDay.length}}">Добавить день в проффесиональный</button>
   </div>
 
     <div class="container" *ngIf="workoutsProDay">
@@ -15,13 +15,13 @@
                <div > <button class="button-wrap" routerLink="/workout/{{2}}/{{workout}}">{{workout + 1}} день</button> </div>
             </div>
 
-    </div>  
+    </div>
     </div>
     <div>
     <h3>Для начинающих (lite)</h3>
 
 <div>
-    <button style="margin: 10px; background-color: #6864cb; border-color: #6864cb; margin: 40px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);" class="btn btn-success" [routerLink]="'../new-exercise'">Добавить день в начинающих</button>
+    <button style="margin: 10px; background-color: #6864cb; border-color: #6864cb; margin: 40px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);" class="btn btn-success" routerLink="/new-day/{{1}}/{{workoutsLiteDay.length}}">Добавить день в начинающих</button>
 </div>
 
     <div class="container" *ngIf="workoutsLiteDay">
