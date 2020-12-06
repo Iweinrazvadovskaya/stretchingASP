@@ -6,7 +6,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ExerciseService } from 'src/app/services/exercise.service';
 import { WorkoutsService } from 'src/app/services/workouts.service';
 
-
 @Component({
   selector: 'app-add-exercise-in-workout',
   templateUrl: './add-exercise-in-workout.component.html',
@@ -29,33 +28,21 @@ export class AddExerciseInWorkoutComponent implements OnInit {
     })
   }
 
-  setIdExercise(id:number){
-    console.log(id)
-    this.selectedExercise = id
-  }
-
   ngOnInit() {
     this.getHero();
-  //   this.addExerciseForm = this.fb.group({
-  //     sequence: this.lastId + 1,
-  //     repeats: [null, Validators.required],
-  //     exercise_id:  this.selectedExercise,
-  //     day: this.day,
-  //     program_id: this.program
-  //     });
-  //  }
+
     this.addExerciseForm = new FormGroup({
-      "exercise_id": new FormControl(),
-      "repeats": new FormControl()
+      exercise_id: new FormControl(),
+      repeats: new FormControl(),
+      day: new FormControl(this.day),
+      sequence: new FormControl(this.lastId + 1),
+      program_id: new FormControl(this.program)
     })
 }
 
   add(){
-    console.log(this.addExerciseForm.value)
-    this.addExerciseForm.addControl("sequence", new FormControl(`${this.lastId + 1}`));
-    this.addExerciseForm.addControl("day", new FormControl(`${this.day}`));
-    this.addExerciseForm.addControl("program_id",new FormControl(`${this.program}`));
-    console.log(this.addExerciseForm.value)
+  console.log(this.addExerciseForm.value.exercise_id)
+    this.addExerciseForm.value.exercise_id = Number(this.addExerciseForm.value.exercise_id)
 
     this.service.addExerciseInWorkout(this.addExerciseForm.value).subscribe(data => {
       this._route.navigate(["/workout/" + this.program + "/" + this.day])

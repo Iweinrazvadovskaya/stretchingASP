@@ -1,1 +1,14 @@
-<p>new-day works!</p>
+<div class="example-container">
+  <mat-form-field appearance="fill">
+    <mat-label>Input</mat-label>
+    <input matInput>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Упражнение</mat-label>
+    <mat-select formControlName="exercise_id">
+      <mat-option *ngFor="let item of exercisesNames"  value={{item.exercise_id}} >{{item.short_name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</div>

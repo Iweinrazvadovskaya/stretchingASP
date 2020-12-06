@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -134,13 +135,10 @@ namespace Stretching.Controllers
         [HttpPost]
         public void PostWorkoutEntity([FromBody] WorkoutDto dto)
         {
-
-            var workoutEntity = new WorkoutEntity() {repeats = dto.repeats, day = dto.day, exercise_id = dto.exercise_id, program_id = dto.program_id};
+            var workoutEntity = new WorkoutEntity() {repeats = dto.repeats, day = dto.day, exercise_id = dto.exercise_id, program_id = dto.program_id, sequence = dto.sequence};
 
             _context.workout_entity.Add(workoutEntity);
             _context.SaveChanges();
-
-         //   return CreatedAtAction("GetWorkoutEntity", new { id = workoutEntity.w_id }, workoutEntity);
         }
 
 

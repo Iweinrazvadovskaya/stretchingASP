@@ -21,6 +21,7 @@ export class WorkoutsService {
 
   addExerciseInWorkout(workout: Workout) {
     console.log(workout)
+
     return this.http.post<Workout>(this._baseURL, workout);
   }
 }

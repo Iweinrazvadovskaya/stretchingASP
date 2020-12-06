@@ -21,7 +21,6 @@ export class NewExerciseComponent implements OnInit {
       preview_url: [null, Validators.required],
       video_url: [null, Validators.required],
       short_name: [null, Validators.required],
-
       name:[null, Validators.required],
       description:[null, Validators.required],
       lang:[null, Validators.required]
@@ -34,7 +33,7 @@ export class NewExerciseComponent implements OnInit {
     },
     (err) => console.error(err),
     // The 3rd callback handles the "complete" event.
-    () =>    
+    () =>
       console.log("good") );
   }
 }

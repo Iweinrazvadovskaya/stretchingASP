@@ -15,6 +15,7 @@ import { AddExerciseInWorkoutComponent } from './components/add-exercise-in-work
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
 import { NewDayComponent } from './components/new-day/new-day.component';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { NewDayComponent } from './components/new-day/new-day.component';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    MatInputModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
