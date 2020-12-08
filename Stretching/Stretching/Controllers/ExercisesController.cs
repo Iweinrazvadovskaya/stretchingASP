@@ -29,7 +29,7 @@ namespace Stretching.Controllers
         public IEnumerable<Object> Getstretching_exercise()
         {
             var listTrEx = from a in _context.stretching_exercise
-                                               join p in _context.exercise_translation_entity on a.id equals p.parent_id where p.lang == "ru" || p.lang == "en"
+                                               join p in _context.exercise_translation_entity on a.id equals p.parent_id where p.lang == "ru"
                            select new
                                               {
                                                   id = a.id,

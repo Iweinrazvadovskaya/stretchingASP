@@ -10,6 +10,7 @@ import { ExerciseService } from 'src/app/services/exercise.service';
 export class ShowExerciseComponent implements OnInit {
 
   exerciseId: number;
+  exercise: Exercise;
   constructor(private route: ActivatedRoute, private service: ExerciseService, private _router: Router) { }
 
   ngOnInit() {
@@ -18,5 +19,9 @@ export class ShowExerciseComponent implements OnInit {
 
   getParams() {
     this.exerciseId = +this.route.snapshot.paramMap.get('exerciseId');
+    this.service.getExercisesById(this.exerciseId)
+    .subscribe(data => this.exercise = data);
+
+    console.log(this.exercise);
   }
 }

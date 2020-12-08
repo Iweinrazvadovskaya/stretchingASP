@@ -20,6 +20,6 @@ export class ListExercisesComponent implements OnInit {
   }
 
   goToExercise(exercise_id: number){
-    this._router.navigate(['/add-exercise-in-workout/' + exercise_id]);
+    this._router.navigate(['/show-exercise/' + exercise_id]);
   }
 }

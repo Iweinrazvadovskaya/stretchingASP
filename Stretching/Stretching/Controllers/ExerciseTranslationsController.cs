@@ -39,6 +39,8 @@ namespace Stretching.Controllers
                 return NotFound();
             }
 
+
+
             return exerciseTranslation;
         }
 

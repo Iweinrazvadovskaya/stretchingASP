@@ -36,4 +36,8 @@ export class ExerciseService {
   getExercisesName() {
     return this.http.get<ExerciseNames[]>(this._baseURL + '/exrciseNames')
   }
+
+  getExercisesById(id: number) {
+    return this.http.get<ExerciseTranslation>(this._baseURL + '/' + id);
+  }
 }
