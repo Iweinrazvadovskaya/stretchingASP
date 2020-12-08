@@ -10,8 +10,8 @@ import { forkJoin, of } from 'rxjs';
 })
 export class ExerciseService {
 
-  _baseURL: string = "api/exercises";
-  _languageURL: string = "api/exercisetranslations"
+  _baseURL = 'api/exercises';
+  _languageURL = 'api/exercisetranslations'
 
   constructor(private http: HttpClient) { }
 
@@ -27,13 +27,13 @@ export class ExerciseService {
   //   return this.http.post(this._languageURL, translation);
   // }
 
-  deleteExercise(id: number){
-    console.log(id)
+  deleteExercise(id: number) {
+    console.log(id);
 
-    return this.http.delete(this._baseURL + '?id=' + id)
+    return this.http.delete(this._baseURL + '?id=' + id);
   }
 
-  getExercisesName(){
-    return this.http.get<ExerciseNames[]>(this._baseURL + "/exrciseNames")
+  getExercisesName() {
+    return this.http.get<ExerciseNames[]>(this._baseURL + '/exrciseNames')
   }
 }

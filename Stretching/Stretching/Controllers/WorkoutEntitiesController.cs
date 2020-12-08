@@ -141,6 +141,17 @@ namespace Stretching.Controllers
             _context.SaveChanges();
         }
 
+        [HttpPost("workoutDay")]
+        public void PostWorkouts([FromBody] List<WorkoutDto> dto)
+        {
+
+            for(int i=0; i < dto.Count(); i++)
+            {
+                var workoutEntity = new WorkoutEntity() { repeats = dto[i].repeats, day = dto[i].day, exercise_id = dto[i].exercise_id, program_id = dto[i].program_id, sequence = dto[i].sequence };
+                _context.workout_entity.Add(workoutEntity);
+                _context.SaveChanges();
+            }
+        }
 
         /*        [HttpDelete("workoutDayDelete")]
                 public Exercise DeleteWorkoutDay(int day)

@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Stretching.Context;
+using Stretching.Models.ModelsDto;
 using Stretching.MVC.Models;
 
 namespace Stretching.Controllers
@@ -23,9 +25,24 @@ namespace Stretching.Controllers
 
         // GET: api/UserAccounts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserAccount>>> Getuser_account()
+        public string Getuser_account()
         {
-            return await _context.user_account.ToListAsync();
+             return JsonConvert.SerializeObject(_context.user_account.Join(_context.user_info,
+                    ua => ua.id,
+                    e => e.user_id,
+                    (ua, e) => new { ua, e })
+                .Select(
+                 user_all => new
+                 {
+                     id = user_all.ua.id,
+                     user_password = user_all.ua.user_password,
+                     user_name = user_all.ua.user_name,
+                     role = user_all.ua.role,
+                     id_info = user_all.e.id,
+                     height = user_all.e.height,
+                     weight_ = user_all.e.weight_,
+                     desired_weight = user_all.e.desired_weight
+                 }).OrderBy(o => o.id).ToList());
         }
 
         // GET: api/UserAccounts/5
@@ -78,12 +95,13 @@ namespace Stretching.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<UserAccount>> PostUserAccount(UserAccount userAccount)
+        public void PostUserAccount(UserDto userAccount)
         {
-            _context.user_account.Add(userAccount);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetUserAccount", new { id = userAccount.id }, userAccount);
+            var user = _context.user_account.Add(new UserAccount() { user_name = userAccount.user_name, user_password = userAccount.user_password, role = userAccount.role });
+            _context.SaveChanges();
+            int id = _context.user_account.Max(o => o.id);
+            _context.user_info.Add(new UserInfo() { user_id = id, height = userAccount.height, weight_ = userAccount.weight_, desired_weight = userAccount.desired_weight });
+            _context.SaveChanges();
         }
 
         // DELETE: api/UserAccounts/5

@@ -1,3 +1,6 @@
+<app-nav-menu></app-nav-menu>
+
+<div class = "container">
 <p *ngIf="!exercisesNames"><b>Loading...</b></p>
 
 <form [formGroup]="addExerciseForm" novalidate (ngSubmit)=add()>
@@ -23,4 +26,5 @@
 
 </form>
 
+</div>
 

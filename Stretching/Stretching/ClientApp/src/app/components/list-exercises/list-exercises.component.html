@@ -1,0 +1,20 @@
+<app-nav-user-menu></app-nav-user-menu>
+
+<div class = "container">
+
+    <h3>{{exercises.length}} УПРАЖНЕНИЙ</h3>
+
+
+    <div class="container1" *ngIf="exercises">
+             <div *ngFor="let exercise of exercises">
+               <div >
+                  <button class="button-wrap" (click)="goToExercise(exercise.id)">
+                    <img width="100%" style="border-radius: 15% 15%  0 0; padding-top:0%;" src="{{exercise.preview_url}}"/>
+                    <mat-label>{{exercise.name}}</mat-label>
+                    день</button>
+                    <div style="height: 100%;"></div>
+                 </div>
+            </div>
+
+    </div>
+</div>

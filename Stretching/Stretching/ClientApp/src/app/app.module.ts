@@ -1,3 +1,4 @@
+import { DaylyWorkoutComponent } from './components/dayly-workout/dayly-workout.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,6 +17,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
 import { NewDayComponent } from './components/new-day/new-day.component';
 import {MatInputModule} from '@angular/material/input';
+import { UsersComponent } from './components/users/users.component';
+import { NewUserComponent } from './components/new-user/new-user.component';
+import { LoginComponent } from './components/login/login.component';
+import { NavUserMenuComponent } from './components/nav-user-menu/nav-user-menu.component';
+import { UserPageComponent } from './components/user-page/user-page.component';
+import { ListExercisesComponent } from './components/list-exercises/list-exercises.component';
+import { ShowExerciseComponent } from './components/show-exercise/show-exercise.component';
+import { MatCardModule } from '@angular/material/card';
+import { UserSideComponent } from './components/user-side/user-side.component';
+import { AdminSideComponent } from './components/admin-side/admin-side.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -31,19 +43,43 @@ import {MatInputModule} from '@angular/material/input';
     WorkoutComponent,
 
     AddExerciseInWorkoutComponent,
-
-    NewDayComponent
+    NewDayComponent,
+    UsersComponent,
+    NewUserComponent,
+    LoginComponent,
+    ShowExerciseComponent,
+    NavUserMenuComponent,
+    ListExercisesComponent,
+    DaylyWorkoutComponent,
+    UserPageComponent,
+    UserSideComponent,
+    AdminSideComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
+    ReactiveFormsModule, BrowserAnimationsModule,
     FormsModule,
     MatInputModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'home', component: HomeComponent },
+      { path: 'user-side', component: UserSideComponent },
+      { path: '', component: LoginComponent, pathMatch: 'full'  },
+      { path: 'nav-user-menu', component: NavUserMenuComponent },
+      { path: 'user-page', component: UserPageComponent },
+      { path: 'list-exercises', component: ListExercisesComponent },
+      { path: 'show-exercise/:exerciseId', component: ShowExerciseComponent },
+      { path: 'dayly-workout', component: DaylyWorkoutComponent },
+
+
+      { path: 'admin-side', component: AdminSideComponent },
       { path: 'exercises', component: ExercisesComponent },
+      { path: 'users', component: UsersComponent },
       { path: 'new-exercise', component: NewExerciseComponent },
+      { path: 'new-user', component: NewUserComponent },
       { path: 'workouts', component: WorkoutsComponent },
       { path: 'workout/:program/:day', component: WorkoutComponent },
       { path: 'add-exercise-in-workout/:day/:program/:lastId', component: AddExerciseInWorkoutComponent },

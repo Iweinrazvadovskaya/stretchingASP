@@ -37,7 +37,7 @@ export class AddExerciseInWorkoutComponent implements OnInit {
       day: new FormControl(this.day),
       sequence: new FormControl(this.lastId + 1),
       program_id: new FormControl(this.program)
-    })
+    });
 }
 
   add(){

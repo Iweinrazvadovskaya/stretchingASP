@@ -8,9 +8,9 @@ namespace Stretching.MVC.Models
     public class UserInfo
     {
         public int id { get; set; }
-        public string height { get; set; }
-        public string weight_ { get; set; }
-        public string desired_weight { get; set; }
+        public int height { get; set; }
+        public int weight_ { get; set; }
+        public int desired_weight { get; set; }
         public int user_id { get; set; }
     }
 }

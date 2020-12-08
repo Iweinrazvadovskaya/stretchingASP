@@ -1,0 +1,33 @@
+
+<div class="container" style="height: 100%; background-color: #6864cb; border-radius: 40px 40px 40px 40px;">
+<div class="container">
+
+<mat-card >
+  <mat-card-title>Вход</mat-card-title>
+<mat-card-content >
+<form [formGroup]="form" (ngSubmit)="submit()">
+<p>
+  <mat-form-field>
+    <input type="text" matInput placeholder="Имя пользователя" formControlName="username">
+  </mat-form-field>
+</p>
+
+<p>
+  <mat-form-field>
+    <input type="password" matInput placeholder="Пароль" formControlName="password">
+  </mat-form-field>
+</p>
+
+<p *ngIf="error" class="error">
+  {{ error }}
+</p>
+
+<div class="button">
+  <button type="submit" class="btn btn-default"  style="margin: 10px; background-color: #6864cb; border-color: #6864cb;">Войти</button>
+</div>
+
+</form>
+</mat-card-content>
+</mat-card>
+</div>
+</div>

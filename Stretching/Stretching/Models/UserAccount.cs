@@ -11,5 +11,7 @@ namespace Stretching.MVC.Models
         [Key] public int id { get; set; }
         public string user_name { get; set; }
         public string user_password { get; set; }
+        public string role { get; set; }
+
     }
 }

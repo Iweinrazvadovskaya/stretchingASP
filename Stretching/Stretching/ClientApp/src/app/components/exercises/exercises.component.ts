@@ -19,7 +19,7 @@ export class ExercisesComponent implements OnInit {
   ngOnInit() {
     this.service.getAllExercises().subscribe(data => {
       this.exerciseTranslations = data;
-    })
+    });
   }
 
   deleteExercise(id: number){
