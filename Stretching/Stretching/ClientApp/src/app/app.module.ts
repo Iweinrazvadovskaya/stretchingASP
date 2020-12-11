@@ -28,6 +28,8 @@ import { MatCardModule } from '@angular/material/card';
 import { UserSideComponent } from './components/user-side/user-side.component';
 import { AdminSideComponent } from './components/admin-side/admin-side.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ShowExerciseWorkoutComponent } from './components/show-exercise-workout/show-exercise-workout.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     DaylyWorkoutComponent,
     UserPageComponent,
     UserSideComponent,
-    AdminSideComponent
+    AdminSideComponent,
+    ShowExerciseWorkoutComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -66,12 +70,14 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
+      { path: 'register', component: RegisterComponent },
       { path: 'user-side', component: UserSideComponent },
       { path: '', component: LoginComponent, pathMatch: 'full'  },
       { path: 'nav-user-menu', component: NavUserMenuComponent },
       { path: 'user-page', component: UserPageComponent },
       { path: 'list-exercises', component: ListExercisesComponent },
       { path: 'show-exercise/:exerciseId', component: ShowExerciseComponent },
+      { path: 'show-exercise-workout/:program/:day/:sequence', component: ShowExerciseWorkoutComponent },
       { path: 'dayly-workout', component: DaylyWorkoutComponent },
 
 

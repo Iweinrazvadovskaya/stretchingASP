@@ -1,6 +1,11 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Input, Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { first } from 'rxjs/operators';
+import { AlertService } from 'src/app/services/alert.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -9,31 +14,75 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private _route: Router){}
+    // if (this.form.valid) {
+    //   this.submitEM.emit(this.form.value);
 
-  ngOnInit(): void {
+    //   if (this.form.value.username == 'admin') {
+    //     this._route.navigate(['/home']);
+
+    //   } else {
+    //        this._route.navigate(['/user-page']);
+    // }
+
+
+  // addRegistrationInput(){
+  //   if (this.registration){
+  //     this.registration = false;
+  //   } else {
+  //   this.registration = true;
+
+  //   }
+  // }
+
+  loginForm: FormGroup;
+  loading = false;
+  submitted = false;
+  returnUrl: string;
+
+  constructor(
+      private formBuilder: FormBuilder,
+      private route: ActivatedRoute,
+      private router: Router,
+      private authenticationService: AuthenticationService,
+      private alertService: AlertService
+  ) {
+      // redirect to home if already logged in
+      if (this.authenticationService.currentUserValue) {
+          this.router.navigate(['/']);
+      }
   }
 
-  form: FormGroup = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
-  });
+  ngOnInit() {
+      this.loginForm = this.formBuilder.group({
+          username: ['', Validators.required],
+          password: ['', Validators.required]
+      });
 
-  submit() {
-    if (this.form.valid) {
-      this.submitEM.emit(this.form.value);
-
-      if (this.form.value.username == 'admin') {
-        this._route.navigate(['/home']);
-
-      } else {
-           this._route.navigate(['/user-page']);
-    }
-
-    }
+      // get return url from route parameters or default to '/'
+      this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
-  @Input() error: string | null;
 
-  @Output() submitEM = new EventEmitter();
+  // convenience getter for easy access to form fields
+  get f() { return this.loginForm.controls; }
 
+  onSubmit() {
+      this.submitted = true;
+
+      // stop here if form is invalid
+      if (this.loginForm.invalid) {
+          return;
+      }
+
+      this.loading = true;
+      this.authenticationService.login(this.f.username.value, this.f.password.value)
+          .pipe(first())
+          .subscribe(
+              data => {
+                  this.router.navigate([this.returnUrl]);
+              },
+              error => {
+                  this.alertService.error(error);
+                  this.loading = false;
+              });
+  }
 }

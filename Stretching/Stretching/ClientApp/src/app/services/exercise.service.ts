@@ -39,5 +39,6 @@ export class ExerciseService {
 
   getExercisesById(id: number) {
     return this.http.get<ExerciseTranslation>(this._baseURL + '/' + id);
+
   }
 }

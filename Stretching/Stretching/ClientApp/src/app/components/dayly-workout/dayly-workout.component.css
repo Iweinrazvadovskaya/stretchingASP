@@ -7,17 +7,32 @@
 
 .block-2 {
   width: 100%;
-  position: absolute;
+  font-size: 190px;
+  color: blueviolet;
   z-index: 100;
   vertical-align: middle;
   transform: position(-50%, -50%)
 }
 
-.container1{
+span.red {
+  background: #6864cb;
+   border-radius: 0.8em;
+  -moz-border-radius: 0.8em;
+  -webkit-border-radius: 0.8em;
+  color: #ffffff;
+  display: inline-block;
+  font-weight: bold;
+  line-height: 1.6em;
+  margin-right: 15px;
+  text-align: center;
+  width: 1.6em;
+}
+
+/* .container1{
   width: 50%;
   height: 50%;
   transform: position(-50%, -50%)
-}
+} */
 /* .block-1 {
   width: 350px;
   height: 350px;

@@ -23,4 +23,12 @@ export class UserService {
     console.log(user);
     return this.http.post(this._baseURL, user);
   }
+
+  getAll() {
+    return this.http.get<User[]>(`/users`);
+}
+
+  register(user: User) {
+    return this.http.post(`/users/register`, user);
+  }
 }

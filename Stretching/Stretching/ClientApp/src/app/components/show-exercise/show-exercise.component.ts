@@ -11,7 +11,9 @@ export class ShowExerciseComponent implements OnInit {
 
   exerciseId: number;
   exercise: Exercise;
-  constructor(private route: ActivatedRoute, private service: ExerciseService, private _router: Router) { }
+  constructor(private route: ActivatedRoute, private service: ExerciseService, private _router: Router) {
+
+   }
 
   ngOnInit() {
     this.getParams();

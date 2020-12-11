@@ -27,22 +27,22 @@ namespace Stretching.Controllers
         [HttpGet]
         public string Getuser_account()
         {
-             return JsonConvert.SerializeObject(_context.user_account.Join(_context.user_info,
-                    ua => ua.id,
-                    e => e.user_id,
-                    (ua, e) => new { ua, e })
-                .Select(
-                 user_all => new
-                 {
-                     id = user_all.ua.id,
-                     user_password = user_all.ua.user_password,
-                     user_name = user_all.ua.user_name,
-                     role = user_all.ua.role,
-                     id_info = user_all.e.id,
-                     height = user_all.e.height,
-                     weight_ = user_all.e.weight_,
-                     desired_weight = user_all.e.desired_weight
-                 }).OrderBy(o => o.id).ToList());
+            return JsonConvert.SerializeObject(_context.user_account.Join(_context.user_info,
+                   ua => ua.id,
+                   e => e.user_id,
+                   (ua, e) => new { ua, e })
+               .Select(
+                user_all => new
+                {
+                    id = user_all.ua.id,
+                    user_password = user_all.ua.user_password,
+                    user_name = user_all.ua.user_name,
+                    role = user_all.ua.role,
+                    id_info = user_all.e.id,
+                    height = user_all.e.height,
+                    weight_ = user_all.e.weight_,
+                    desired_weight = user_all.e.desired_weight
+                }).OrderBy(o => o.id).ToList());
         }
 
         // GET: api/UserAccounts/5
@@ -124,5 +124,20 @@ namespace Stretching.Controllers
         {
             return _context.user_account.Any(e => e.id == id);
         }
+
+        //[HttpPost("login")]
+
+        //public IActionResult Login([FromBody]UserAccount request)
+        //{
+        //    var user = AuthenticateUser(request.user_name, request.user_password);
+
+        //    if (user != null)
+        //    {
+
+        //    }
+        //    return Unauthorized();
+        //}
+
+        //private UserAccount(string user, string password)
     }
 }
