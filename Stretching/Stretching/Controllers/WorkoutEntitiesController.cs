@@ -80,6 +80,7 @@ namespace Stretching.Controllers
                 .Select(
                  workout_exercise => new
                  {
+                     w_id = workout_exercise.w.w_id,
                      day = workout_exercise.w.day,
                      sequence = workout_exercise.w.sequence,
                      time = workout_exercise.w.repeats,
@@ -153,8 +154,14 @@ namespace Stretching.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutWorkoutEntity(int id, WorkoutEntity workoutEntity)
+        public async Task<IActionResult> PutWorkoutEntity(int id, WorkoutDto workoutEntity_)
         {
+
+            int id_w = _context.workout_entity.Where(o => o.day == workoutEntity_.day && o.exercise_id == workoutEntity_.exercise_id && o.program_id == workoutEntity_.program_id).Select(e => e.w_id).FirstOrDefault();
+            id = id_w;
+
+            var workoutEntity = new WorkoutEntity() { w_id = id_w, repeats = workoutEntity_.repeats, day = workoutEntity_.day, exercise_id = workoutEntity_.exercise_id, program_id = workoutEntity_.program_id, sequence = workoutEntity_.sequence };
+
             if (id != workoutEntity.w_id)
             {
                 return BadRequest();

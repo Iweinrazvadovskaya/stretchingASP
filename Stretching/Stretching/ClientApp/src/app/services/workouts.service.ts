@@ -38,4 +38,14 @@ export class WorkoutsService {
   getLastSequenceNumber(day: number, program: number){
     return this.http.get<number>(this._baseURL +  "/sequencesMax?program=" + program + "&day="+ day);
   }
+
+  getWorkoutExerciseById(id: number){
+    return this.http.get<WorkoutEntityDto>(this._baseURL + '/' + id );
+  }
+
+  editWorkoutTranslation(exercise: ExerciseTranslation){
+    console.log(exercise);
+
+    return this.http.put<ExerciseTranslation>(this._baseURL + '/0', exercise );
+  }
 }

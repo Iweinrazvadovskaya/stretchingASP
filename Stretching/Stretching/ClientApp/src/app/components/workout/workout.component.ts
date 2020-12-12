@@ -12,7 +12,7 @@ export class WorkoutComponent implements OnInit {
   public workoutTranslationExercises: WorkoutExercise[] = [];
   router: any;
 
-  constructor(private route: ActivatedRoute, private service: WorkoutsService, private _route: Router) { 
+  constructor(private route: ActivatedRoute, private service: WorkoutsService, private _route: Router) {
     this.route.params.subscribe(data => {
       console.log(data);
     })
@@ -24,7 +24,7 @@ export class WorkoutComponent implements OnInit {
   ngOnInit(): void {
     this.getHero();
   }
-  
+
   getHero(): void {
     this.day = +this.route.snapshot.paramMap.get('day');
     this.program = +this.route.snapshot.paramMap.get('program');
@@ -33,9 +33,12 @@ export class WorkoutComponent implements OnInit {
       .subscribe(data => this.workoutTranslationExercises = data);
   }
 
+  edit(id: number, exId: number){
+    this._route.navigate(['/add-exercise-in-workout/' + this.day + '/' + this.program + '/' + exId + '/1/' + id])
+  }
 
   moveToAddPage(){
     let lastId = this.workoutTranslationExercises.length
-    this._route.navigate(['/add-exercise-in-workout/' + this.day + '/' + this.program + '/' + lastId])
+    this._route.navigate(['/add-exercise-in-workout/' + this.day + '/' + this.program + '/' + lastId + '/0/0'])
   }
 }

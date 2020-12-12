@@ -88,7 +88,7 @@ import { RegisterComponent } from './components/register/register.component';
       { path: 'new-user', component: NewUserComponent },
       { path: 'workouts', component: WorkoutsComponent },
       { path: 'workout/:program/:day', component: WorkoutComponent },
-      { path: 'add-exercise-in-workout/:day/:program/:lastId', component: AddExerciseInWorkoutComponent },
+      { path: 'add-exercise-in-workout/:day/:program/:lastId/:edit/:w_id', component: AddExerciseInWorkoutComponent },
       { path: 'new-day/:program/:lastDay', component: NewDayComponent }
     ]),
     BrowserAnimationsModule,

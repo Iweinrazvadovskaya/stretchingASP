@@ -1,4 +1,5 @@
 interface WorkoutExercise {
+  w_id: number
     day: number;
     sequence: number;
     time: number;

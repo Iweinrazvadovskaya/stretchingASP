@@ -14,6 +14,7 @@ export class NewExerciseComponent implements OnInit {
 
   addExerciseForm: FormGroup;
   exerciseEdit: ExerciseTranslation
+
   ngOnInit() {
 
     this.getParamsAndSetEx()
