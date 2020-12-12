@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AuthCommon;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,8 +22,8 @@ namespace Stretching.Controllers
     public class UserAccountsController : ControllerBase
     {
         private readonly StretchingContext _context;
-        //private readonly IOptions<AuthOptions> authOptions;
-        public UserAccountsController(StretchingContext context /*, IOptions<AuthOptions> auth*/)
+        private readonly IOptions<AuthOptions> authOptions;
+        public UserAccountsController(StretchingContext context, IOptions<AuthOptions> auth)
         {
             _context = context;
          //   this.authOptions = auth;
@@ -148,17 +149,17 @@ namespace Stretching.Controllers
             return _context.user_account.SingleOrDefault(o => o.user_name == user && o.user_password == password);
         }
 
-        //private string GenerateJWT(UserAccount user)
-        //{
-        //    var authParams = authOptions.Value;
-        //    var securityKey = authParams.GetSymmetricSecurityKey();
-        //    var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-        //    var claims = new List<Claim>()
-        //    {
-        //        new Claim(JwtRegisteredClaimNames.Sub, user.user_name)
-        //    };
+        private string GenerateJWT(UserAccount user)
+        {
+            var authParams = authOptions.Value;
+            var securityKey = authParams.GetSymmetricSecurityKey();
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var claims = new List<Claim>()
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, user.user_name)
+            };
 
-        //    foreach(var role in user.role)
-        //}
+            foreach (var role in user.role)
+        }
     }
 }
