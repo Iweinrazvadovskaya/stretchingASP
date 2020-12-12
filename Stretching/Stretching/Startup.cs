@@ -33,7 +33,8 @@ namespace Stretching
             services.AddEntityFrameworkNpgsql();
             services.AddDbContext<StretchingContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("MyConnection")));
 
-
+            var authOptionsConfiguration = Configuration.GetSection("Auth");
+         //   services.Configure<AuthOptions>(authOptionsConfiguration);
             services.AddSwaggerGen();
         }
 
@@ -70,9 +71,7 @@ namespace Stretching
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
 
             app.UseSpa(spa =>

@@ -84,7 +84,7 @@ import { RegisterComponent } from './components/register/register.component';
       { path: 'admin-side', component: AdminSideComponent },
       { path: 'exercises', component: ExercisesComponent },
       { path: 'users', component: UsersComponent },
-      { path: 'new-exercise', component: NewExerciseComponent },
+      { path: 'new-exercise/:edit/:id', component: NewExerciseComponent },
       { path: 'new-user', component: NewUserComponent },
       { path: 'workouts', component: WorkoutsComponent },
       { path: 'workout/:program/:day', component: WorkoutComponent },

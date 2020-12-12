@@ -23,13 +23,18 @@ export class ExerciseService {
     return this.http.post<ExerciseTranslation>(this._baseURL, exercise);
   }
 
+  editExerciseTranslation(exercise: ExerciseTranslation, exerciseId: number){
+    exercise.id = exerciseId;
+    console.log(exercise);
+
+    return this.http.put<ExerciseTranslation>(this._baseURL + '/' + exerciseId, exercise );
+  }
+
   // addTranslation(translation: Translation) {
   //   return this.http.post(this._languageURL, translation);
   // }
 
   deleteExercise(id: number) {
-    console.log(id);
-
     return this.http.delete(this._baseURL + '?id=' + id);
   }
 

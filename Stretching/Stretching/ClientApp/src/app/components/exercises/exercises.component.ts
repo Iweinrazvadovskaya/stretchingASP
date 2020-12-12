@@ -27,4 +27,10 @@ export class ExercisesComponent implements OnInit {
       this._router.navigate(["/exercises"])
     })
   }
+
+  edit(exerciseId: number){
+   // [routerLink]="'../new-exercise/1/'"
+
+    this._router.navigate(["/new-exercise/1/" + exerciseId])
+  }
 }

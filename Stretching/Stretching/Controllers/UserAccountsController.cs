@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Stretching.Context;
 using Stretching.Models.ModelsDto;
@@ -17,10 +21,11 @@ namespace Stretching.Controllers
     public class UserAccountsController : ControllerBase
     {
         private readonly StretchingContext _context;
-
-        public UserAccountsController(StretchingContext context)
+        //private readonly IOptions<AuthOptions> authOptions;
+        public UserAccountsController(StretchingContext context /*, IOptions<AuthOptions> auth*/)
         {
             _context = context;
+         //   this.authOptions = auth;
         }
 
         // GET: api/UserAccounts
@@ -125,19 +130,35 @@ namespace Stretching.Controllers
             return _context.user_account.Any(e => e.id == id);
         }
 
-        //[HttpPost("login")]
+        [HttpPost("login")]
 
-        //public IActionResult Login([FromBody]UserAccount request)
+        public IActionResult Login([FromBody] UserAccount request)
+        {
+            var user = AuthenticateUser(request.user_name, request.user_password);
+
+            if (user != null)
+            {
+
+            }
+            return Unauthorized();
+        }
+
+        private UserAccount AuthenticateUser(string user, string password)
+        {
+            return _context.user_account.SingleOrDefault(o => o.user_name == user && o.user_password == password);
+        }
+
+        //private string GenerateJWT(UserAccount user)
         //{
-        //    var user = AuthenticateUser(request.user_name, request.user_password);
-
-        //    if (user != null)
+        //    var authParams = authOptions.Value;
+        //    var securityKey = authParams.GetSymmetricSecurityKey();
+        //    var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+        //    var claims = new List<Claim>()
         //    {
+        //        new Claim(JwtRegisteredClaimNames.Sub, user.user_name)
+        //    };
 
-        //    }
-        //    return Unauthorized();
+        //    foreach(var role in user.role)
         //}
-
-        //private UserAccount(string user, string password)
     }
 }

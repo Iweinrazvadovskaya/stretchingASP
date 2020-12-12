@@ -6,7 +6,7 @@
 <p *ngIf="!exerciseTranslations"><b>Loading...</b></p>
 
 <div>
-    <button style="margin: 10px; background-color: #6864cb; border-color: #6864cb; " class="btn btn-success" [routerLink]="'../new-exercise'">Добавить упражнение</button>
+    <button style="margin: 10px; background-color: #6864cb; border-color: #6864cb; " class="btn btn-success" [routerLink]="'../new-exercise/0/0'">Добавить упражнение</button>
 </div>
 <table class="table " *ngIf="exerciseTranslations">
     <thead>
@@ -34,7 +34,7 @@
             </td>
             <td>{{exercise.lang}}</td>
             <td>
-                <button style="margin: 10px; background-color: #6864cb; border-color: #6864cb; " width="60" height="20" class="btn btn-success">Отредактировать</button>
+                <button (click)="edit(exercise.id)" style="margin: 10px; background-color: #6864cb; border-color: #6864cb; " width="60" height="20" class="btn btn-success">Отредактировать</button>
                 <br>
                 <button (click)="deleteExercise(exercise.id)" style="margin: 10px; background-color: red; border-color: red;" width="60" height="20"  class="btn btn-success">Удалить упражнение</button>
             </td>

@@ -27,3 +27,31 @@ mat-card-content {
   justify-content: flex-end;
 }
 
+.card-wrap {
+  text-transform:uppercase;
+  font-family:'Arial';
+  font-weight:400;
+  font-size:16px;
+  text-transform: uppercase;
+  color:white;
+  text-align: center;
+  vertical-align: middle;
+  widows: 50%;
+  min-width: 400px;
+
+  height:50%;
+  border: 1px solid #c4c2fa;
+  background-color: #c4c2fa;
+  margin: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 15%;
+  }
+
+  .container1 {
+    display: -webkit-flex;
+    display: inline-flex;
+    height: 50%;
+    align-content: space-between;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }

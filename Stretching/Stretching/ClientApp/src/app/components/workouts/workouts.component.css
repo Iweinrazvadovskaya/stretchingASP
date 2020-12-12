@@ -4,15 +4,14 @@
     transition: 0.5s;
   }
 
-  .container {
-    display: -webkit-flex;  /* для поддержки ранних версий браузеров */
+  .container1 {
+    display: -webkit-flex;
     display: inline-flex;
     height: 200px;
     align-content: space-between;
-    -webkit-flex-wrap: wrap;  /* для поддержки ранних версий браузеров */
-    flex-wrap: wrap;  /* указывает, что флекс элементы внутри контейнера располагаются в несколько горизонтальных рядов (в случае переполнения) */
-    } 
-
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
     .main-div{
       display:flex;
     }
@@ -28,9 +27,9 @@
       vertical-align: middle;
       width:150px;
       height:150px;
-      border: 1px solid #c4c2fa; 
-      background-color: #c4c2fa; 
+      border: 1px solid #c4c2fa;
+      background-color: #c4c2fa;
       margin: 20px;
       box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
       border-radius: 15%;
-      } 
+      }

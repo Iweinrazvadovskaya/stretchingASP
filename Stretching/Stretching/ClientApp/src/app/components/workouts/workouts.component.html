@@ -14,7 +14,7 @@
       <button style="margin: 10px; background-color: #6864cb; border-color: #6864cb; margin: 40px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);" class="btn btn-success" routerLink="/new-day/{{2}}/{{workoutsProDay.length}}">Добавить день в проффесиональный</button>
   </div>
 
-    <div class="container" *ngIf="workoutsProDay">
+    <div class="container1" *ngIf="workoutsProDay">
              <div *ngFor="let workout of workoutsProDay">
                <div > <button class="button-wrap" routerLink="/workout/{{2}}/{{workout}}">{{workout + 1}} день</button> </div>
             </div>
@@ -28,7 +28,7 @@
     <button style="margin: 10px; background-color: #6864cb; border-color: #6864cb; margin: 40px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);" class="btn btn-success" routerLink="/new-day/{{1}}/{{workoutsLiteDay.length}}">Добавить день в начинающих</button>
 </div>
 
-    <div class="container" *ngIf="workoutsLiteDay">
+    <div class="container1" *ngIf="workoutsLiteDay">
              <div *ngFor="let workout of workoutsLiteDay">
                <div > <button class="button-wrap" routerLink="/workout/{{1}}/{{workout}}">{{workout + 1}} день</button> </div>
             </div>

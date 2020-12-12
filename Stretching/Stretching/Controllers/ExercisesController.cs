@@ -62,7 +62,7 @@ namespace Stretching.Controllers
 
         // GET: api/Exercises/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Exercise>> GetExercise(int id)
+        public async Task<ActionResult<ExerciseTranslatioDto>> GetExercise(int id)
         {
             var exercise = await _context.stretching_exercise.FindAsync(id);
 
@@ -71,21 +71,32 @@ namespace Stretching.Controllers
                 return NotFound();
             }
 
-            return exercise;
+            ExerciseTranslation translation = await _context.exercise_translation_entity.FirstOrDefaultAsync(i => i.parent_id == exercise.id);
+
+            if (exercise == null)
+            {
+                return NotFound();
+            }
+
+            var newExercise = new ExerciseTranslatioDto() { id = id, preview_url = exercise.preview_url, short_name = exercise.short_name, video_url = exercise.video_url, description = translation.description, lang = translation.lang, name = translation.name  };
+
+            return newExercise;
         }
 
         // PUT: api/Exercises/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutExercise(int id, Exercise exercise)
+        public async Task<IActionResult> PutExercise(int id, ExerciseTranslatioDto exercise)
         {
-            if (id != exercise.id)
+            var newExercise = new Exercise() { id = id, preview_url = exercise.preview_url, short_name = exercise.short_name, video_url = exercise.video_url };
+
+            if (id != newExercise.id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(exercise).State = EntityState.Modified;
+            _context.Entry(newExercise).State = EntityState.Modified;
 
             try
             {
@@ -101,6 +112,28 @@ namespace Stretching.Controllers
                 {
                     throw;
                 }
+            }
+
+            int id_tr = _context.exercise_translation_entity.Where(o => o.parent_id == exercise.id && o.lang == exercise.lang).Select(e => e.t_id).FirstOrDefault();
+
+            var translation = new ExerciseTranslation()
+            {
+                t_id = id_tr,
+                description = exercise.description,
+                lang = exercise.lang,
+                name = exercise.name,
+                parent_id = id
+            };
+
+            _context.Entry(translation).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
             }
 
             return NoContent();
