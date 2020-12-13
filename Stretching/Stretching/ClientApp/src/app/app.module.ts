@@ -18,7 +18,7 @@ import { AddExerciseInWorkoutComponent } from './components/add-exercise-in-work
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
 import { NewDayComponent } from './components/new-day/new-day.component';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { UsersComponent } from './components/users/users.component';
 import { NewUserComponent } from './components/new-user/new-user.component';
 import { LoginComponent } from './components/login/login.component';
@@ -29,13 +29,15 @@ import { ShowExerciseComponent } from './components/show-exercise/show-exercise.
 import { MatCardModule } from '@angular/material/card';
 import { UserSideComponent } from './components/user-side/user-side.component';
 import { AdminSideComponent } from './components/admin-side/admin-side.component';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ShowExerciseWorkoutComponent } from './components/show-exercise-workout/show-exercise-workout.component';
 import { RegisterComponent } from './components/register/register.component';
-import {JwtModule} from '@auth0/angular-jwt';
+import { JwtModule } from '@auth0/angular-jwt';
 import { ACCESS_TOKEN_KEY } from './services/authentication.service';
 import { from } from 'rxjs';
 import { AUTH_API_URL } from './app-injection-tokens';
+
+
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -81,7 +83,7 @@ export function tokenGetter() {
     ReactiveFormsModule,
 
     JwtModule.forRoot({
-      config:{
+      config: {
         tokenGetter,
         allowedDomains: environment.tokenWhiteListedDomains,
       }
@@ -90,7 +92,7 @@ export function tokenGetter() {
       { path: 'home', component: HomeComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'user-side', component: UserSideComponent },
-      { path: '', component: LoginComponent, pathMatch: 'full'  },
+      { path: '', component: LoginComponent, pathMatch: 'full' },
       { path: 'nav-user-menu', component: NavUserMenuComponent },
       { path: 'user-page', component: UserPageComponent },
       { path: 'list-exercises', component: ListExercisesComponent },
@@ -114,9 +116,10 @@ export function tokenGetter() {
     MatSelectModule
   ],
   providers: [ExerciseService,
-  {​​​​​
-  provide:AUTH_API_URL,
-  useValue: ['localhost:44391']}​​​​​
+    {
+      provide: AUTH_API_URL,
+      useValue: ['localhost:44391']
+    }
   ],
   bootstrap: [AppComponent]
 })

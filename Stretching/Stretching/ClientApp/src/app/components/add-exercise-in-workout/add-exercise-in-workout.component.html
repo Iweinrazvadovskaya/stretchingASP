@@ -1,30 +1,30 @@
 <app-nav-menu></app-nav-menu>
 
-<div class = "container">
-<p *ngIf="!exercisesNames"><b>Loading...</b></p>
+<div class="container">
+  <p *ngIf="!exercisesNames"><b>Loading...</b></p>
 
-<form [formGroup]="addExerciseForm" novalidate (ngSubmit)=add()>
+  <form [formGroup]="addExerciseForm" novalidate (ngSubmit)=add()>
 
     <mat-form-field appearance="fill">
-        <mat-label>Упражнение</mat-label>
-        <mat-select formControlName="exercise_id">
-          <mat-option *ngFor="let item of exercisesNames"  value={{item.exercise_id}} >{{item.short_name}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <mat-label>Упражнение</mat-label>
+      <mat-select formControlName="exercise_id">
+        <mat-option *ngFor="let item of exercisesNames" value={{item.exercise_id}}>{{item.short_name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
 
     <div class="form-group">
-        <label >Очередь упражнения воркауте {{lastId + 1}}</label>
+      <label>Очередь упражнения воркауте {{lastId + 1}}</label>
     </div>
 
-<div class="form-group">
-    <label for="repeats">Время</label>
-    <input type="text" class="form-control" id="repeats" formControlName="repeats" placeholder="Время длительности упражнения"/>
+    <div class="form-group">
+      <label for="repeats">Время</label>
+      <input type="text" class="form-control" id="repeats" formControlName="repeats"
+        placeholder="Время длительности упражнения" />
+    </div>
+
+    <input type="submit" [disabled]="addExerciseForm.invalid" class="btn btn-success" value="Добавить">
+    <button class="btn btn-default" [routerLink]="'/exercises'"> Отменить </button>
+
+  </form>
+
 </div>
-
-<input type="submit" [disabled]="addExerciseForm.invalid" class="btn btn-success" value="Добавить">
-<button class="btn btn-default" [routerLink]="'/exercises'"> Отменить </button>
-
-</form>
-
-</div>
-

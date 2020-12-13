@@ -1,42 +1,46 @@
 <app-nav-menu></app-nav-menu>
 
-<div class = "container">
+<div class="container">
 
-<div class="add-exercise">
+  <div class="add-exercise">
 
-  <form [formGroup]="addExerciseForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
+    <form [formGroup]="addExerciseForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
         <label for="name">Название</label>
-        <input type="text" class="form-control" id="name" formControlName="name" placeholder="Название упражнения"/>
-    </div>
+        <input type="text" class="form-control" id="name" formControlName="name" placeholder="Название упражнения" />
+      </div>
 
-    <div class="form-group">
+      <div class="form-group">
         <label for="description">Описание</label>
-        <input type="text" class="form-control" id="description" formControlName="description" placeholder="Описание упражнения"/>
-    </div>
+        <input type="text" class="form-control" id="description" formControlName="description"
+          placeholder="Описание упражнения" />
+      </div>
 
-    <div class="form-group">
+      <div class="form-group">
         <label for="lang">Язык</label>
-        <input type="text" class="form-control" id="lang" formControlName="lang" placeholder="Язык (для примера ru)"/>
-    </div>
-    <div class="form-group">
-      <label for="preview_url">Превью</label>
-      <input type="text" class="form-control" id="preview_url" formControlName="preview_url" placeholder="Ссылка на превью упражнения (полная)" />
-    </div>
+        <input type="text" class="form-control" id="lang" formControlName="lang" placeholder="Язык (для примера ru)" />
+      </div>
+      <div class="form-group">
+        <label for="preview_url">Превью</label>
+        <input type="text" class="form-control" id="preview_url" formControlName="preview_url"
+          placeholder="Ссылка на превью упражнения (полная)" />
+      </div>
 
-    <div class="form-group">
-      <label for="video_url">Видео</label>
-      <input type="text" class="form-control" id="video_url" formControlName="video_url" placeholder="Название видео упражнения (с расширением)" />
-    </div>
+      <div class="form-group">
+        <label for="video_url">Видео</label>
+        <input type="text" class="form-control" id="video_url" formControlName="video_url"
+          placeholder="Название видео упражнения (с расширением)" />
+      </div>
 
-    <div class="form-group">
-      <label for="short_name">Сокращенное имя</label>
-      <input type="text" class="form-control" id="short_name" formControlName="short_name" placeholder="Сокращенное имя упражнения" />
-    </div>
+      <div class="form-group">
+        <label for="short_name">Сокращенное имя</label>
+        <input type="text" class="form-control" id="short_name" formControlName="short_name"
+          placeholder="Сокращенное имя упражнения" />
+      </div>
 
-    <button class="btn btn-success" [routerLink]="'/new-exercise'"> Добавить </button>
-    <button class="btn btn-default" [routerLink]="'/exercises'"> Отменить </button>
+      <button class="btn btn-success" [routerLink]="'/new-exercise'"> Добавить </button>
+      <button class="btn btn-default" [routerLink]="'/exercises'"> Отменить </button>
 
-  </form>
-</div>
+    </form>
+  </div>
 </div>

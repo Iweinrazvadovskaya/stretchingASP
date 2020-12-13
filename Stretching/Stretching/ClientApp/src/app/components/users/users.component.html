@@ -1,42 +1,47 @@
 <app-nav-menu></app-nav-menu>
 
-<div class = "container">
+<div class="container">
 
-<h1>Пользователи</h1>
+    <h1>Пользователи</h1>
 
-<p *ngIf="!users"><b>Loading...</b></p>
+    <p *ngIf="!users"><b>Loading...</b></p>
 
-<div>
-    <button style="margin: 10px; background-color: #6864cb; border-color: #6864cb; " class="btn btn-success" [routerLink]="'../new-user/0/0'">Добавить пользователя</button>
-</div>
-<table class="table " *ngIf="users">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Имя</th>
-            <th>Пароль</th>
-            <th>Роль</th>
-            <th>Рост</th>
-            <th>Вес</th>
-            <th>Желаемый вес</th>
-            <th>Действия</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let user of users">
-            <td>{{user.id}}</td>
-            <td>{{user.user_name}}</td>
-            <td>{{user.user_password}}</td>
-            <td>{{user.role}}</td>
-            <td>{{user.height}}</td>
-            <td>{{user.weight_}}</td>
-            <td>{{user.desired_weight}}</td>
-            <td>
-                <button (click)="edit(user.id)" style="margin: 10px; background-color: #6864cb; border-color: #6864cb; " width="60" height="20" class="btn btn-success">Редактировать</button>
-                <br>
-                <button (click)="deleteUser(user.id)" style="margin: 10px; background-color: red; border-color: red;" width="60" height="20"  class="btn btn-success">Удалить пользователя</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+    <div>
+        <button style="margin: 10px; background-color: #6864cb; border-color: #6864cb; " class="btn btn-success"
+            [routerLink]="'../new-user/0/0'">Добавить пользователя</button>
+    </div>
+    <table class="table " *ngIf="users">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Имя</th>
+                <th>Пароль</th>
+                <th>Роль</th>
+                <th>Рост</th>
+                <th>Вес</th>
+                <th>Желаемый вес</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td>{{user.id}}</td>
+                <td>{{user.user_name}}</td>
+                <td>{{user.user_password}}</td>
+                <td>{{user.role}}</td>
+                <td>{{user.height}}</td>
+                <td>{{user.weight_}}</td>
+                <td>{{user.desired_weight}}</td>
+                <td>
+                    <button (click)="edit(user.id)"
+                        style="margin: 10px; background-color: #6864cb; border-color: #6864cb; " width="60" height="20"
+                        class="btn btn-success">Редактировать</button>
+                    <br>
+                    <button (click)="deleteUser(user.id)"
+                        style="margin: 10px; background-color: red; border-color: red;" width="60" height="20"
+                        class="btn btn-success">Удалить пользователя</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

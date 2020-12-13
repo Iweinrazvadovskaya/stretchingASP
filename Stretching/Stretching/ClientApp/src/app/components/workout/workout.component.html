@@ -1,39 +1,43 @@
 <app-nav-menu></app-nav-menu>
 
-<div class = "container">
+<div class="container">
 
-<h1>Список упражнений воркаута</h1>
+    <h1>Список упражнений воркаута</h1>
 
-<p *ngIf="!workoutTranslationExercises"><b>Loading...</b></p>
+    <p *ngIf="!workoutTranslationExercises"><b>Loading...</b></p>
 
-<div>
-    <button style="margin: 10px; background-color: #6864cb; border-color: #6864cb;" class="btn btn-success" (click) = "moveToAddPage()">Добавить упражнение</button>
-</div>
-<table class="table " *ngIf="workoutTranslationExercises">
-    <thead style="background-color: #f0f0f0;">
-        <tr>
-            <th>Порядок</th>
-            <th>Название</th>
-            <th>Время</th>
-            <th>Превью</th>
-            <th>Название программы</th>
-            <th>Действия</th>
+    <div>
+        <button style="margin: 10px; background-color: #6864cb; border-color: #6864cb;" class="btn btn-success"
+            (click)="moveToAddPage()">Добавить упражнение</button>
+    </div>
+    <table class="table " *ngIf="workoutTranslationExercises">
+        <thead style="background-color: #f0f0f0;">
+            <tr>
+                <th>Порядок</th>
+                <th>Название</th>
+                <th>Время</th>
+                <th>Превью</th>
+                <th>Название программы</th>
+                <th>Действия</th>
 
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let exercise of workoutTranslationExercises">
-            <td>{{exercise.sequence + 1}}</td>
-            <td>{{exercise.name}}</td>
-            <td>{{exercise.time}}</td>
-            <td><img width="300" height="180" class="image-exercise" src="{{exercise.preview_url}}"/> </td>
-            <td>{{exercise.program_name}}</td>
-            <td>
-                <button (click)="edit(exercise.w_id, exercise.exercise_id)" style="margin: 10px; background-color: #6864cb; border-color: #6864cb;" width="60" height="20" class="btn btn-success">Редактировать</button>
-                <br>
-                <button style="margin: 10px; background-color: red; border-color: red;" width="60" height="20"  class="btn btn-success">Удалить из воркаута</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let exercise of workoutTranslationExercises">
+                <td>{{exercise.sequence + 1}}</td>
+                <td>{{exercise.name}}</td>
+                <td>{{exercise.time}}</td>
+                <td><img width="300" height="180" class="image-exercise" src="{{exercise.preview_url}}" /> </td>
+                <td>{{exercise.program_name}}</td>
+                <td>
+                    <button (click)="edit(exercise.w_id, exercise.exercise_id)"
+                        style="margin: 10px; background-color: #6864cb; border-color: #6864cb;" width="60" height="20"
+                        class="btn btn-success">Редактировать</button>
+                    <br>
+                    <button style="margin: 10px; background-color: red; border-color: red;" width="60" height="20"
+                        class="btn btn-success">Удалить из воркаута</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

@@ -1,28 +1,25 @@
-
-<div class="container" style=" height: 100%; width: 100%;">
-
-  <!-- <div class="container1"> -->
-  <!-- <div class="card-wrap"> -->
-    <mat-card *ngIf='!isLoggedIn'>
+<div class="login-page">
+  <div class="login-page-description">
+    <div class="header-title">Fitnes.by</div>
+    <div class="title">Start doing <span>sports</span> right now! :))))</div>
+    <img src="assets/images/4.png" alt="">
+  </div>
+  <div class="login-page-container">
+    <div class="form-header">Don`t have account? <a [routerLink]="['/register/']">Create Now</a></div>
+    <form class="login-page-form">
       <h2>Вход</h2>
-
-      <mat-form-field class="example-form-field">
+      <mat-form-field>
         <mat-label>Имя</mat-label>
         <input type="text" matInput placeholder="JhonDaw" #name>
       </mat-form-field>
-      <mat-form-field class="example-form-field">
+      <mat-form-field>
         <mat-label>Пароль</mat-label>
         <input type="password" matInput #password>
       </mat-form-field>
-      <button style="margin: 10px; background-color: #6864cb; border-color: #6864cb;" mat-flat-button color="primary" (click)='login(name.value, password.value)' class="btn btn-primary">Войти</button>
-      <a routerLink="/register" class="btn btn-link">Register</a>
-
-    </mat-card>
-
-      <mat-card *ngIf='isLoggedIn'>
-        <button mat-flat-button color="primary" (click)='logout()'>Выйти</button>>
-      </mat-card>
-    <router-outlet></router-outlet>
+      <div class="sign-button-container">
+        <div class="sign-putton" (click)='login(name.value, password.value)'>Войти</div>
+        <a [routerLink]="['/register/']">Register</a>
+      </div>
+    </form>
+  </div>
 </div>
-<!-- </div>
-</div> -->

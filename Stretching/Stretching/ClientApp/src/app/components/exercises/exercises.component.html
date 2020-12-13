@@ -1,44 +1,50 @@
 <app-nav-menu></app-nav-menu>
-<div class = "container">
+<div class="container">
 
-<h1>Упражнения</h1>
+    <h1>Упражнения</h1>
 
-<p *ngIf="!exerciseTranslations"><b>Loading...</b></p>
+    <p *ngIf="!exerciseTranslations"><b>Loading...</b></p>
 
-<div>
-    <button style="margin: 10px; background-color: #6864cb; border-color: #6864cb; " class="btn btn-success" [routerLink]="'../new-exercise/0/0'">Добавить упражнение</button>
-</div>
-<table class="table " *ngIf="exerciseTranslations">
-    <thead>
-        <tr>
-            <th>Очередь</th>
-            <th>Название</th>
-            <th>Описание</th>
-            <th>Превью</th>
-            <th>Видео</th>
-            <th>Язык</th>
-            <th>Действия</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let exercise of exerciseTranslations">
-            <td>{{exercise.id}}</td>
-            <td>{{exercise.name}}</td>
-            <td>{{exercise.description}}</td>
-            <td><img width="300" height="180" class="image-exercise" src="{{exercise.preview_url}}"/> </td>
-            <td>
-                <video width="300" height="180" controls>
-                    <source src="{{'https://dm3yxr1fx7bnn.cloudfront.net/exercise/video/' + exercise.video_url}}" type="video/mp4">
-                  Your browser does not support the video tag.
-                  </video>
-            </td>
-            <td>{{exercise.lang}}</td>
-            <td>
-                <button (click)="edit(exercise.id)" style="margin: 10px; background-color: #6864cb; border-color: #6864cb; " width="60" height="20" class="btn btn-success">Отредактировать</button>
-                <br>
-                <button (click)="deleteExercise(exercise.id)" style="margin: 10px; background-color: red; border-color: red;" width="60" height="20"  class="btn btn-success">Удалить упражнение</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+    <div>
+        <button style="margin: 10px; background-color: #6864cb; border-color: #6864cb; " class="btn btn-success"
+            [routerLink]="'../new-exercise/0/0'">Добавить упражнение</button>
+    </div>
+    <table class="table " *ngIf="exerciseTranslations">
+        <thead>
+            <tr>
+                <th>Очередь</th>
+                <th>Название</th>
+                <th>Описание</th>
+                <th>Превью</th>
+                <th>Видео</th>
+                <th>Язык</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let exercise of exerciseTranslations">
+                <td>{{exercise.id}}</td>
+                <td>{{exercise.name}}</td>
+                <td>{{exercise.description}}</td>
+                <td><img width="300" height="180" class="image-exercise" src="{{exercise.preview_url}}" /> </td>
+                <td>
+                    <video width="300" height="180" controls>
+                        <source src="{{'https://dm3yxr1fx7bnn.cloudfront.net/exercise/video/' + exercise.video_url}}"
+                            type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </td>
+                <td>{{exercise.lang}}</td>
+                <td>
+                    <button (click)="edit(exercise.id)"
+                        style="margin: 10px; background-color: #6864cb; border-color: #6864cb; " width="60" height="20"
+                        class="btn btn-success">Отредактировать</button>
+                    <br>
+                    <button (click)="deleteExercise(exercise.id)"
+                        style="margin: 10px; background-color: red; border-color: red;" width="60" height="20"
+                        class="btn btn-success">Удалить упражнение</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
