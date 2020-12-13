@@ -16,6 +16,7 @@
     height: 100%;
   }
   .login-page-description img{
+      margin-top: 20%;
     width: 90%;
   }
   .login-page-form{
@@ -66,7 +67,7 @@
     margin: 2rem;
     margin-left: 5rem;
     letter-spacing: 3px;
-    color: #7b6b9c
+    color: #fff
   }
   .form-header{
     position: absolute;
@@ -74,4 +75,9 @@
     right: 0;
     margin: 2rem;
     margin-left: 5rem;
+  }
+  @media only screen and (max-width: 600px) {
+    .login-page-description{
+       display: none;
+    }
   }
