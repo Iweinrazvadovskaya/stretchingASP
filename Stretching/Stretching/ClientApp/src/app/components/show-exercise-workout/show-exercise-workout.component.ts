@@ -58,7 +58,7 @@ export class ShowExerciseWorkoutComponent implements OnInit {
 
    getNext(){
      if (this.workoutFinished){
-      this._router.navigate(['/show-exercise-workout/'])
+      this._router.navigate(['/workout-finished/' + this.day])
      } else {
       this._router.navigate(['/show-exercise-workout/' + this.program + '/' + this.day + '/' + this.sequence+1])
      }

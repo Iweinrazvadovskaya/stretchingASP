@@ -28,7 +28,17 @@ export class UserService {
     return this.http.get<User[]>(`/users`);
 }
 
-  register(user: User) {
-    return this.http.post(`/users/register`, user);
+  register(user: UserDto) {
+    return this.http.post(this._baseURL, user);
   }
+
+  getUserById(id: number){
+    return this.http.get<User>(this._baseURL + '/userDto/' + id)
+  }
+
+  // editExerciseTranslation(usr: User){
+  //   console.log(usr);
+
+  //   return this.http.put<User>(this._baseURL + '/' + usr.id, usr );
+  // }
 }

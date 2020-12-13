@@ -25,16 +25,18 @@ export class RegisterComponent implements OnInit {
       private alertService: AlertService
   ) {
       // redirect to home if already logged in
-      if (this.authenticationService.currentUserValue) {
-          this.router.navigate(['/']);
-      }
+      // if (this.authenticationService.currentUserValue) {
+      //     this.router.navigate(['/']);
+      // }
   }
 
   ngOnInit() {
       this.registerForm = this.formBuilder.group({
-          firstName: ['', Validators.required],
-          lastName: ['', Validators.required],
-          username: ['', Validators.required],
+          role: 'user',
+          name: ['', Validators.required],
+          height: ['', Validators.required],
+          weight: ['', Validators.required],
+          desired_weight: ['', Validators.required],
           password: ['', [Validators.required, Validators.minLength(6)]]
       });
   }
@@ -44,23 +46,18 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
       this.submitted = true;
-
-      // stop here if form is invalid
-      if (this.registerForm.invalid) {
-          return;
-      }
+      this.registerForm.value.height = Number(this.registerForm.value.height);
+      this.registerForm.value.weight = Number(this.registerForm.value.weight);
+      this.registerForm.value.desired_weight = Number(this.registerForm.value.desired_weight);
 
       this.loading = true;
+      console.log(this.registerForm.value)
       this.userService.register(this.registerForm.value)
           .pipe(first())
           .subscribe(
               data => {
-                  this.alertService.success('Registration successful', true);
+                  this.alertService.success('Пользователь зарегистрирован', true);
                   this.router.navigate(['/login']);
-              },
-              error => {
-                  this.alertService.error(error);
-                  this.loading = false;
               });
   }
 }

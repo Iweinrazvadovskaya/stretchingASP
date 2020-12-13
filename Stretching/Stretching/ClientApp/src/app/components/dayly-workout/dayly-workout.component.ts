@@ -10,12 +10,12 @@ import { WorkoutsService } from 'src/app/services/workouts.service';
 })
 export class DaylyWorkoutComponent implements OnInit {
 
-  countDown:Subscription;
+  countDown: Subscription;
   counter = 5;
   tick = 1000;
   start = false;
   viewStartpage = true;
-  showExercise = false;
+  showExercise = true;
   public day: number = 1;
   public program: number = 1;
   public workoutTranslationExercises: WorkoutExercise[] = [];
@@ -32,18 +32,14 @@ export class DaylyWorkoutComponent implements OnInit {
     this.service.getWorkoutByProgramAndDay(this.day, this.program)
       .subscribe(data =>
         this.workoutTranslationExercises = data);
-
   }
 
   constructor(private route: ActivatedRoute, private service: WorkoutsService, private _route: Router) { }
-
-
 
   startWorkout(){
     this.start = true;
     this.viewStartpage = false;
     this.counterTimer(5);
-
   }
 
   counterTimer(time_: number){
@@ -51,7 +47,6 @@ export class DaylyWorkoutComponent implements OnInit {
     this.countDown = timer(0, this.tick)
     .subscribe(data =>{
       if (this.counter == 0){
-        this.countDown = null;
         this.getNext();
       } else {
       --this.counter;
@@ -68,8 +63,9 @@ export class DaylyWorkoutComponent implements OnInit {
     // this.counterTimer(Number(this.currentExercise.time));
     // this.workoutTranslationExercises.splice(0, 1);
     this._route.navigate(['/show-exercise-workout/' + this.workoutTranslationExercises[0].program_id + '/' + this.workoutTranslationExercises[0].day + '/' + this.workoutTranslationExercises[0].sequence])
-
-    // show-exercise-workout/:workoutArray
   }
 
+  ngOnDestroy(){
+    this.countDown=null;
+  }
 }

@@ -1,11 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "vEomVN0dUyb0ypS+K8pB8PAxi8BxjAhMGOLLQp07aulKHj18KVf67xRaVVMg1tCBi4Q7JzqOdafA7J9dxMqreA==",
+  "dgSpecHash": "3TCvPneWXRC/wYDems5E+tbOEZ0llQ0setZxKYW01BAo70bGQH4Gb80fr+Qj5VNmgvNh2u/F26ncBIrdx2/SSA==",
   "success": true,
   "projectFilePath": "D:\\stretchingASP\\Stretching\\AuthCommon\\AuthCommon.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Jane\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\Jane\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\6.8.0\\microsoft.identitymodel.jsonwebtokens.6.8.0.nupkg.sha512",
+    "C:\\Users\\Jane\\.nuget\\packages\\microsoft.identitymodel.logging\\6.8.0\\microsoft.identitymodel.logging.6.8.0.nupkg.sha512",
+    "C:\\Users\\Jane\\.nuget\\packages\\microsoft.identitymodel.tokens\\6.8.0\\microsoft.identitymodel.tokens.6.8.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\Jane\\.nuget\\packages\\system.identitymodel.tokens.jwt\\6.8.0\\system.identitymodel.tokens.jwt.6.8.0.nupkg.sha512",
+    "C:\\Users\\Jane\\.nuget\\packages\\system.security.cryptography.cng\\4.5.0\\system.security.cryptography.cng.4.5.0.nupkg.sha512"
   ],
   "logs": []
 }

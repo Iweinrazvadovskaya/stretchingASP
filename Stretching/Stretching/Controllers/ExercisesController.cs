@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,7 @@ namespace Stretching.Controllers
     [ApiController]
     public class ExercisesController : ControllerBase
     {
+        private Guid UserId => Guid.Parse(User.Claims.Single(c => c.Type == ClaimTypes.NameIdentifier).Value);
         private readonly StretchingContext _context;
 
         public ExercisesController(StretchingContext context)
@@ -26,6 +28,7 @@ namespace Stretching.Controllers
 
         // GET: api/Exercises
         [HttpGet]
+
         public IEnumerable<Object> Getstretching_exercise()
         {
             var listTrEx = from a in _context.stretching_exercise

@@ -3,31 +3,26 @@
 
   <!-- <div class="container1"> -->
   <!-- <div class="card-wrap"> -->
-    <h2>Вход</h2>
+    <mat-card *ngIf='!isLoggedIn'>
+      <h2>Вход</h2>
 
-  <form style="background-color: white;" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-            <div *ngIf="f.username.errors.required">Username is required</div>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-            <div *ngIf="f.password.errors.required">Password is required</div>
-        </div>
-    </div>
-    <div class="form-group">
-        <button style="margin: 10px; background-color: #6864cb; border-color: #6864cb;" [disabled]="loading" class="btn btn-primary">
-            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-            Login
-        </button>
-        <a routerLink="/register" class="btn btn-link">Register</a>
-    </div>
-</form>
+      <mat-form-field class="example-form-field">
+        <mat-label>Имя</mat-label>
+        <input type="text" matInput placeholder="JhonDaw" #name>
+      </mat-form-field>
+      <mat-form-field class="example-form-field">
+        <mat-label>Пароль</mat-label>
+        <input type="password" matInput #password>
+      </mat-form-field>
+      <button style="margin: 10px; background-color: #6864cb; border-color: #6864cb;" mat-flat-button color="primary" (click)='login(name.value, password.value)' class="btn btn-primary">Войти</button>
+      <a routerLink="/register" class="btn btn-link">Register</a>
+
+    </mat-card>
+
+      <mat-card *ngIf='isLoggedIn'>
+        <button mat-flat-button color="primary" (click)='logout()'>Выйти</button>>
+      </mat-card>
+    <router-outlet></router-outlet>
 </div>
 <!-- </div>
 </div> -->

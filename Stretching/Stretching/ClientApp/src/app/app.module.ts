@@ -1,3 +1,5 @@
+import { WorkoutFinishedComponent } from './components/workout-finished/workout-finished.component';
+import { environment } from './../environments/environment';
 import { DaylyWorkoutComponent } from './components/dayly-workout/dayly-workout.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -30,6 +32,14 @@ import { AdminSideComponent } from './components/admin-side/admin-side.component
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ShowExerciseWorkoutComponent } from './components/show-exercise-workout/show-exercise-workout.component';
 import { RegisterComponent } from './components/register/register.component';
+import {JwtModule} from '@auth0/angular-jwt';
+import { ACCESS_TOKEN_KEY } from './services/authentication.service';
+import { from } from 'rxjs';
+import { AUTH_API_URL } from './app-injection-tokens';
+
+export function tokenGetter() {
+  return localStorage.getItem(ACCESS_TOKEN_KEY);
+}
 
 @NgModule({
   declarations: [
@@ -57,7 +67,8 @@ import { RegisterComponent } from './components/register/register.component';
     UserSideComponent,
     AdminSideComponent,
     ShowExerciseWorkoutComponent,
-    RegisterComponent
+    RegisterComponent,
+    WorkoutFinishedComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -68,6 +79,13 @@ import { RegisterComponent } from './components/register/register.component';
     MatCardModule,
     MatProgressSpinnerModule,
     ReactiveFormsModule,
+
+    JwtModule.forRoot({
+      config:{
+        tokenGetter,
+        allowedDomains: environment.tokenWhiteListedDomains,
+      }
+    }),
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
       { path: 'register', component: RegisterComponent },
@@ -79,13 +97,14 @@ import { RegisterComponent } from './components/register/register.component';
       { path: 'show-exercise/:exerciseId', component: ShowExerciseComponent },
       { path: 'show-exercise-workout/:program/:day/:sequence', component: ShowExerciseWorkoutComponent },
       { path: 'dayly-workout', component: DaylyWorkoutComponent },
+      { path: 'workout-finished/:day', component: WorkoutFinishedComponent },
 
 
       { path: 'admin-side', component: AdminSideComponent },
       { path: 'exercises', component: ExercisesComponent },
       { path: 'users', component: UsersComponent },
       { path: 'new-exercise/:edit/:id', component: NewExerciseComponent },
-      { path: 'new-user', component: NewUserComponent },
+      { path: 'new-user/:edit/:id', component: NewUserComponent },
       { path: 'workouts', component: WorkoutsComponent },
       { path: 'workout/:program/:day', component: WorkoutComponent },
       { path: 'add-exercise-in-workout/:day/:program/:lastId/:edit/:w_id', component: AddExerciseInWorkoutComponent },
@@ -94,7 +113,11 @@ import { RegisterComponent } from './components/register/register.component';
     BrowserAnimationsModule,
     MatSelectModule
   ],
-  providers: [ExerciseService],
+  providers: [ExerciseService,
+  {​​​​​
+  provide:AUTH_API_URL,
+  useValue: ['localhost:44391']}​​​​​
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

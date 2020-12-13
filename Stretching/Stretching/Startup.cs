@@ -1,3 +1,5 @@
+using AuthCommon;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,12 +31,45 @@ namespace Stretching
                 configuration.RootPath = "ClientApp/dist";
             });
 
-          //  services.AddTransient<IStudentsService, STre>();
+         //   services.AddTransient<IStudentsService, STre>();
             services.AddEntityFrameworkNpgsql();
             services.AddDbContext<StretchingContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("MyConnection")));
 
             var authOptionsConfiguration = Configuration.GetSection("Auth");
-         //   services.Configure<AuthOptions>(authOptionsConfiguration);
+            services.Configure<AuthOptions>(authOptionsConfiguration);
+            var authOptions = Configuration.GetSection("Auth").Get<AuthOptions>();
+
+            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            //    .AddJwtBearer(options =>
+            //    {
+            //        options.RequireHttpsMetadata = false;
+            //        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+            //        {
+            //            ValidateIssuer = true,
+            //            ValidIssuer = authOptions.Issuer,
+
+            //            ValidateAudience = true,
+            //            ValidAudience = authOptions.Audience,
+
+            //            ValidateLifetime = true,
+
+            //            IssuerSigningKey = authOptions.GetSymmetricSecurityKey(),
+            //            ValidateIssuerSigningKey = true,
+            //        };
+            //    });
+
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                    });
+            });
+
             services.AddSwaggerGen();
         }
 
@@ -68,6 +103,10 @@ namespace Stretching
             }
 
             app.UseRouting();
+
+            app.UseCors();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
