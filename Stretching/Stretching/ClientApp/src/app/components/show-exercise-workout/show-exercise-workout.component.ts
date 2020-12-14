@@ -5,15 +5,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ExerciseService } from 'src/app/services/exercise.service';
 import { Subscription } from 'rxjs';
 import { timer } from 'rxjs/internal/observable/timer';
+import { OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-show-exercise-workout',
   templateUrl: './show-exercise-workout.component.html',
   styleUrls: ['./show-exercise-workout.component.css']
 })
-export class ShowExerciseWorkoutComponent implements OnInit {
+export class ShowExerciseWorkoutComponent implements OnInit, OnDestroy {
   countDown:Subscription;
-  counter = 5;
+  counter = 40;
   tick = 1000;
   public program: number;
   public day: number;
@@ -56,6 +57,9 @@ export class ShowExerciseWorkoutComponent implements OnInit {
    });
    }
 
+   ngOnDestroy() {
+    this.countDown.unsubscribe()
+  }
    getNext(){
      if (this.workoutFinished){
       this._router.navigate(['/workout-finished/' + this.day])

@@ -1,4 +1,4 @@
-.spinner {
+/* .spinner {
   position: absolute;
   z-index: 99;
   vertical-align: middle;
@@ -11,7 +11,6 @@
   color: blueviolet;
   z-index: 100;
   vertical-align: middle;
-  transform: position(-50%, -50%)
 }
 
 span.red {
@@ -26,7 +25,7 @@ span.red {
   margin-right: 15px;
   text-align: center;
   width: 1.6em;
-}
+} */
 
 /* .container1{
   width: 50%;
@@ -66,3 +65,53 @@ span.red {
   width: 400px;
   background-color: khaki;
 } */
+
+.dayly-workout-container{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5rem;
+  flex-direction: column;
+}
+.dayly-workout-day-title{
+  font-size: 1.7rem;
+}
+.dayly-workout-day-number{
+  font-size: 3rem;
+  margin: 2rem;
+  color: #6864cb;
+}
+.dayly-workout-loadder{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  color:#2f2e49;
+  width:350px;
+  height: 350px;
+  border-radius: 50%;
+  border: 10px solid #6864cb;
+  cursor: pointer;
+  overflow: hidden;
+}
+.dayly-workout-startbutton{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width:350px;
+  height: 350px;
+}
+.loadder-time{
+  font-size: 5rem;
+  animation: 1s anim infinite;
+}
+@keyframes anim{
+  50%{
+    transform: scale(1.5);
+  }
+}
+.ready{
+  font-size: 2rem;
+  color:#2f2e49;
+  margin: 2rem;
+}
