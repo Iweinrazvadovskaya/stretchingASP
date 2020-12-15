@@ -14,13 +14,13 @@ export const ACCESS_TOKEN_KEY = 'ATRETCHING_ACCESS_TOKEN'
 })
 export class AuthenticationService {
 
-  private currentUserSubject: BehaviorSubject<User>;
-  public currentUser: Observable<User>;
+  private currentUserSubject: BehaviorSubject<User1>;
+  public currentUser: Observable<User1>;
 
   constructor(private http: HttpClient, @Inject(AUTH_API_URL) private apiUrl: string,
   private jwtHelper: JwtHelperService,
   private router: Router) {
-      this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+      this.currentUserSubject = new BehaviorSubject<User1>(JSON.parse(localStorage.getItem('currentUser')));
       this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -42,5 +42,4 @@ export class AuthenticationService {
     var token = localStorage.getItem(ACCESS_TOKEN_KEY);
     return token && !this.jwtHelper.isTokenExpired(token)
   }
-
 }

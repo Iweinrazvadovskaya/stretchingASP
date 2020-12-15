@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Stretching.Context;
+using Stretching.Models.ModelsDto;
 using Stretching.MVC.Models;
 
 namespace Stretching.Controllers
@@ -74,16 +76,39 @@ namespace Stretching.Controllers
             return NoContent();
         }
 
+        [HttpGet("workoutPassed")]
+        public int getPassedWorkoutCount(int id)
+        {
+            
+              var result = _context.workout_plan
+                  .Select(
+                 workout_exercise => new
+                 {
+                     _id = workout_exercise.user_id
+                 }
+                ).Where(j => j._id == id)
+                 .ToList()
+                ;
+            if (result.Count == 0)
+            {
+                return 0;
+            }
+            return result.Count();
+        }
+
         // POST: api/CompletedWorkouts
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<CompletedWorkout>> PostCompletedWorkout(CompletedWorkout completedWorkout)
+        public void PostCompletedWorkout([FromBody] CompletedClassDto completedWorkout)
         {
-            _context.workout_plan.Add(completedWorkout);
-            await _context.SaveChangesAsync();
+            var workoutEntity = new CompletedWorkout() {
+                workout_day = completedWorkout.workout_day,
+                program_id = completedWorkout.program_id,
+                user_id = completedWorkout.user_id };
 
-            return CreatedAtAction("GetCompletedWorkout", new { id = completedWorkout.id_p }, completedWorkout);
+            _context.workout_plan.Add(workoutEntity);
+            _context.SaveChanges();
         }
 
         // DELETE: api/CompletedWorkouts/5

@@ -12,6 +12,5 @@ namespace Stretching.MVC.Models
         public int user_id { get; set; }
         public int workout_day { get; set; }
         public int program_id { get; set; }
-        public string date { get; set; }
     }
 }

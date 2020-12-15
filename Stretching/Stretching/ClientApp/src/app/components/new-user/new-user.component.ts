@@ -14,8 +14,8 @@ export class NewUserComponent implements OnInit {
   addExerciseForm: FormGroup;
 
   edit = false
-  userEdit: User
-
+  userEdit: User1
+  public path =''
   ngOnInit() {
     this.getParams();
 
@@ -26,7 +26,8 @@ export class NewUserComponent implements OnInit {
       role: [null, Validators.required],
       height:[null, Validators.required],
       weight_:[null, Validators.required],
-      desired_weight:[null, Validators.required]
+      desired_weight:[null, Validators.required],
+      program: [null, Validators.required]
     });
   }
 
@@ -35,20 +36,22 @@ export class NewUserComponent implements OnInit {
     this.addExerciseForm.value.weight_ = Number(this.addExerciseForm.value.weight_);
     this.addExerciseForm.value.desired_weight = Number(this.addExerciseForm.value.desired_weight);
 
+    if (this.addExerciseForm.value.program == 'lite'){
+      this.addExerciseForm.value.program = Number(1);
+    } else {
+      this.addExerciseForm.value.program = Number(2);
+    }
+
     if (this.edit){
       console.log(this.addExerciseForm.value);
       this.addExerciseForm.value.id = this.userEdit.id;
-      // this.service.editExerciseTranslation(this.addExerciseForm.value).subscribe(data =>
-      //     this.router.navigate(["/exercises"])
-      //     )
+      this.service.editExerciseTranslation(this.addExerciseForm.value).subscribe(data =>
+          this.router.navigate(["/users"])
+          )
     } else {
       this.service.addUser(this.addExerciseForm.value).subscribe(data => {
         this.router.navigate(['/users']);
-      },
-      (err) => console.error(err),
-      // The 3rd callback handles the "complete" event.
-      () =>
-        console.log('good') );
+      });
     }
 
   }
@@ -58,11 +61,12 @@ export class NewUserComponent implements OnInit {
     var edit_ = +Number(this.route.snapshot.paramMap.get('edit'));
     var id = +Number(this.route.snapshot.paramMap.get('id'));
 
+    this.path = '/new-user/' + edit_ + '/' + id;
     if(edit_ == 1){
       this.edit = true
 
       var exId = +this.route.snapshot.paramMap.get('lastId');
-      this.service.getUserById(id)
+      this.service.getUserData(id)
       .subscribe(data => {
         this.userEdit = data
         console.log(data)
@@ -73,6 +77,11 @@ export class NewUserComponent implements OnInit {
         this.addExerciseForm.controls['height'].setValue(this.userEdit.height);
         this.addExerciseForm.controls['weight_'].setValue(this.userEdit.weight_);
         this.addExerciseForm.controls['desired_weight'].setValue(this.userEdit.desired_weight);
+        if (1 == data.program){
+          this.addExerciseForm.controls['program'].setValue('lite');
+        } else {
+          this.addExerciseForm.controls['program'].setValue('lite');
+        }
        });
     } else {
       this.edit = false

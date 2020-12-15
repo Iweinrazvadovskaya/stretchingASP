@@ -13,7 +13,6 @@ import { WorkoutsService } from 'src/app/services/workouts.service';
 })
 export class AddExerciseInWorkoutComponent implements OnInit {
 
-  public workoutTranslationExercises: WorkoutExercise = null;
   public exercisesNames: ExerciseNames[] = []
 
   edit = false;
@@ -88,7 +87,7 @@ export class AddExerciseInWorkoutComponent implements OnInit {
 
     if(edit_ == 1){
       this.edit = true
-
+      this.lastId -=1
       var exId = +this.route.snapshot.paramMap.get('lastId');
       this.service.getWorkoutExerciseById(w_id)
       .subscribe(data => {
@@ -109,9 +108,3 @@ export class AddExerciseInWorkoutComponent implements OnInit {
 
   }
 }
-
-// exercise_id: new FormControl(),
-// repeats: new FormControl(),
-// day: new FormControl(this.day),
-// sequence: new FormControl(this.lastId + 1),
-// program_id: new FormControl(this.program)

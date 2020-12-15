@@ -43,9 +43,13 @@ export class WorkoutsService {
     return this.http.get<WorkoutEntityDto>(this._baseURL + '/' + id );
   }
 
-  editWorkoutTranslation(exercise: ExerciseTranslation){
+  editWorkoutTranslation(exercise: Workout){
     console.log(exercise);
 
-    return this.http.put<ExerciseTranslation>(this._baseURL + '/0', exercise );
+    return this.http.put<Workout>(this._baseURL + '/0', exercise );
+  }
+
+  deleteExercise(id: number){
+    return this.http.delete(this._baseURL + '/' + id);
   }
 }

@@ -12,4 +12,5 @@ interface WorkoutExercise {
     description: string;
     program_name:string;
     program_id: number;
+    repeats: string;
   }

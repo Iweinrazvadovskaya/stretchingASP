@@ -1,3 +1,4 @@
+import { UserService } from './../../services/user.service';
 import { ThrowStmt } from '@angular/compiler';
 import { Input, Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -14,7 +15,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private as: AuthenticationService){}
+  constructor(private as: AuthenticationService, private userService: UserService, private _route: Router){}
 
   ngOnInit(){
   }
@@ -24,7 +25,17 @@ export class LoginComponent implements OnInit {
   }
 
   login(name: string, password:string){
+
     this.as.login(name, password).subscribe( res =>{
+      this.userService.getUserRole(name).subscribe( res =>{
+          if (res.role == 'admin'){
+            localStorage.setItem('user_id', String(res.id));
+            this._route.navigate(["/home"])
+          } else {
+            localStorage.setItem('user_id', String(res.id));
+            this._route.navigate(["/user-page"])
+          }
+        });
 
     }, error => {
       alert('Wrong login or password.')

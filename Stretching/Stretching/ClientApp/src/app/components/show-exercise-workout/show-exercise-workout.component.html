@@ -1,14 +1,14 @@
 <app-nav-user-menu></app-nav-user-menu>
-<div class="show-exercise-container">
+<div class="show-exercise-container" *ngIf="currentExercise">
      <div class="exercise-name">Name of exercise</div>
      <video controls>
           <source src=""
                type="video/mp4">
           Your browser does not support the video tag.
      </video>
-     
+
      <div class="dayly-workout-loadder">
-          <div class="loadder-time">{{counter}}</div>
+          <div class="loadder-time">{{timer_s}}</div>
      </div>
      <div class="exercise-description">Name of exercise Name of exercise Name of exerciseName of exerciseName of exerciseName of exerciseName
            of exerciseName of exerciseName of exerciseName of exercise</div>

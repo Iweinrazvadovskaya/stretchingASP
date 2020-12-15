@@ -12,5 +12,6 @@ namespace Stretching.MVC.Models
         public int weight_ { get; set; }
         public int desired_weight { get; set; }
         public int user_id { get; set; }
+        public int program { get; set; }
     }
 }

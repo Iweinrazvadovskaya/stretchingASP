@@ -92,7 +92,8 @@ namespace Stretching.Controllers
                      language = workout_exercise.tr.lang,
                      description = workout_exercise.tr.description,
                      program_name = workout_exercise.pr.program_name,
-                     program_id = workout_exercise.pr.p_id
+                     program_id = workout_exercise.pr.p_id,
+                     repeats = workout_exercise.w.repeats
                  }
                 ).Where(o => o.program_id == program && o.day == day && o.language == "ru").OrderBy(o => o.sequence)
                 .ToList());
@@ -126,7 +127,8 @@ namespace Stretching.Controllers
                        language = workout_exercise.tr.lang,
                        description = workout_exercise.tr.description,
                        program_name = workout_exercise.pr.program_name,
-                       program_id = workout_exercise.pr.p_id
+                       program_id = workout_exercise.pr.p_id,
+                       repeats = workout_exercise.w.repeats
                    }
                   ).Where(o => o.program_id == program && o.day == day && o.language == "ru" && o.sequence == sequence).OrderBy(o => o.sequence);
 

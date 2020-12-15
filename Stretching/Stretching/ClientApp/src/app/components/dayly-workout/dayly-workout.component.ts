@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/services/user.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, timer } from 'rxjs';
@@ -34,7 +35,7 @@ export class DaylyWorkoutComponent implements OnInit, OnDestroy {
   //       this.workoutTranslationExercises = data);
   // }
 
-  // constructor(private route: ActivatedRoute, private service: WorkoutsService, private _route: Router) { 
+  // constructor(private route: ActivatedRoute, private service: WorkoutsService, private _route: Router) {
   //   this.currentExercise
   // }
 
@@ -77,19 +78,36 @@ export class DaylyWorkoutComponent implements OnInit, OnDestroy {
   isWorkoutStart:boolean=false;
   countDown: Subscription;
 
-  program=0;
-  day=0;
-  sequence=0;
+  program=1;
+  day=1;
+  sequence=1;
 
-  constructor(private route:Router){
+  constructor(private route:Router, private userServise: UserService){
 
   }
   ngOnInit() {
-    
+    this.getWorkoutInfo()
   }
   ngOnDestroy() {
     this.countDown.unsubscribe()
   }
+
+  getWorkoutInfo(){
+    this.userServise.getWorkoutPassed(Number(localStorage.getItem('user_id'))).subscribe(data => {
+      if(data == 0){
+        this.day = 1
+      } else {
+      this.day = data;
+      }
+  });
+
+    this.userServise.getUserData(Number(localStorage.getItem('user_id')))
+    .subscribe(data => {
+      this.program = data.program
+      this.sequence = 1
+    });
+  }
+
   startWorkout() {
     this.isWorkoutStart=true;
     this.setTimeToStartWorkouot(5)
@@ -99,6 +117,7 @@ export class DaylyWorkoutComponent implements OnInit, OnDestroy {
     this.countDown = timer(0, 1000)
     .subscribe(data =>{
       if (this.timeToStartWorkout == 0){
+        console.log(this.day + "-----" + this.sequence + "----" + this.program)
         this.route.navigate([`/show-exercise-workout/${this.program}/${this.day}/${this.sequence}`]);
       } else {
       --this.timeToStartWorkout;

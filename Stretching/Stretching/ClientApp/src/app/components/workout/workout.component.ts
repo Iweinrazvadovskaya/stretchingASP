@@ -33,8 +33,14 @@ export class WorkoutComponent implements OnInit {
       .subscribe(data => this.workoutTranslationExercises = data);
   }
 
-  edit(id: number, exId: number){
-    this._route.navigate(['/add-exercise-in-workout/' + this.day + '/' + this.program + '/' + exId + '/1/' + id])
+  edit(id: number, seq:number){
+    this._route.navigate(['/add-exercise-in-workout/' + this.day + '/' + this.program + '/' + seq + '/1/' + id])
+  }
+
+  deleteExercise(id: number){
+    this.service.deleteExercise(id).subscribe(data => {
+    location.reload();
+    })
   }
 
   moveToAddPage(){

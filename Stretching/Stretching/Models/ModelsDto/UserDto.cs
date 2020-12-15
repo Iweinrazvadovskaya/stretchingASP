@@ -13,5 +13,7 @@ namespace Stretching.Models.ModelsDto
         public int height { get; set; }
         public int weight_ { get; set; }
         public int desired_weight { get; set; }
+        public int program { get; set; }
+
     }
 }

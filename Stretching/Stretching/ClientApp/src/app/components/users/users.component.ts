@@ -7,7 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  public users: User[] = [];
+  public users: User1[] = [];
+  program: string
 
   constructor(private _router: Router, private service: UserService) { }
 

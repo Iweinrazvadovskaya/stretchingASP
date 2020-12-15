@@ -47,6 +47,7 @@ namespace Stretching.Controllers
                     id_info = user_all.e.id,
                     height = user_all.e.height,
                     weight_ = user_all.e.weight_,
+                    program = user_all.e.program,
                     desired_weight = user_all.e.desired_weight
                 }).OrderBy(o => o.id).ToList());
         }
@@ -84,16 +85,62 @@ namespace Stretching.Controllers
                              id_info = user_all.e.id,
                              height = user_all.e.height,
                              weight_ = user_all.e.weight_,
+                             desired_weight = user_all.e.desired_weight,
+                             program = user_all.e.program
+                         }).Where(o => o.id == id).FirstOrDefault());
+
+
+            return result;
+        }
+
+        [HttpGet("userDataWorkoutData")]
+        public string GetUserWokoutDataById(int id)
+        {
+            //var userAccount = _context.user_account.Find(id);
+
+            var result = JsonConvert.SerializeObject(_context.user_account
+                .Join(_context.user_info,
+                   ua => ua.id,
+                   e => e.user_id,
+                   (ua, e) => new { ua, e })
+                    .Select(
+                         user_all => new {
+                             id = user_all.ua.id,
+                             user_password = user_all.ua.user_password,
+                             user_name = user_all.ua.user_name,
+                             role = user_all.ua.role,
+                             id_info = user_all.e.id,
+                             height = user_all.e.height,
+                             weight_ = user_all.e.weight_,
+                             program = user_all.e.program,
                              desired_weight = user_all.e.desired_weight
                          }).Where(o => o.id == id).FirstOrDefault());
 
 
             return result;
         }
+
+
+
+        [HttpGet("userRole")]
+        public string GetUserById(string name)
+        {
+            //var userAccount = _context.user_account.Find(id);
+
+            var result = JsonConvert.SerializeObject(_context.user_account.Where(o => o.user_name == name)
+                    .Select(
+                         user_all => new {
+                             role = user_all.role,
+                             id = user_all.id
+                         }).FirstOrDefault());
+
+            return result;
+        }
+
         // PUT: api/UserAccounts/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutUserAccount(int id, UserAccountInfo userAccountInfo)
         {
             var userAccount = new UserAccount() { id = id,
@@ -125,25 +172,26 @@ namespace Stretching.Controllers
                 }
             }
 
-            //var userInfo = new UserInfo()
-            //{
-            //    id = userAccountInfo.id_info,
-            //    height = userAccountInfo.height,
-            //    desired_weight = userAccountInfo.desired_weight,
-            //    weight_ = userAccountInfo.weight_,
-            //    user_id = id
-            //};
+            var userInfo = new UserInfo()
+            {
+                id = userAccountInfo.id_info,
+                height = userAccountInfo.height,
+                desired_weight = userAccountInfo.desired_weight,
+                weight_ = userAccountInfo.weight_,
+                user_id = id,
+                program  = userAccountInfo.program
+            };
 
-            //_context.Entry(userInfo).State = EntityState.Modified;
+            _context.Entry(userInfo).State = EntityState.Modified;
 
-            //try
-            //{
-            //    await _context.SaveChangesAsync();
-            //}
-            //catch (DbUpdateConcurrencyException)
-            //{
-            //        throw;
-            //}
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
 
             return NoContent();
         }
@@ -157,7 +205,7 @@ namespace Stretching.Controllers
             var user = _context.user_account.Add(new UserAccount() { user_name = userAccount.user_name, user_password = userAccount.user_password, role = userAccount.role });
             _context.SaveChanges();
             int id = _context.user_account.Max(o => o.id);
-            _context.user_info.Add(new UserInfo() { user_id = id, height = userAccount.height, weight_ = userAccount.weight_, desired_weight = userAccount.desired_weight });
+            _context.user_info.Add(new UserInfo() { user_id = id, height = userAccount.height, weight_ = userAccount.weight_, desired_weight = userAccount.desired_weight, program = userAccount.program });
             _context.SaveChanges();
         }
 

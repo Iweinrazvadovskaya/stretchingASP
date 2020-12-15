@@ -33,11 +33,12 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
       this.registerForm = this.formBuilder.group({
           role: 'user',
-          name: ['', Validators.required],
+          user_name: ['', Validators.required],
           height: ['', Validators.required],
-          weight: ['', Validators.required],
+          weight_: ['', Validators.required],
           desired_weight: ['', Validators.required],
-          password: ['', [Validators.required, Validators.minLength(6)]]
+          program: ['', Validators.required],
+          user_password: ['', [Validators.required, Validators.minLength(6)]]
       });
   }
 
@@ -45,19 +46,18 @@ export class RegisterComponent implements OnInit {
   get f() { return this.registerForm.controls; }
 
   onSubmit() {
-      this.submitted = true;
-      this.registerForm.value.height = Number(this.registerForm.value.height);
-      this.registerForm.value.weight = Number(this.registerForm.value.weight);
-      this.registerForm.value.desired_weight = Number(this.registerForm.value.desired_weight);
+    this.registerForm.value.height = Number(this.registerForm.value.height);
+    this.registerForm.value.weight_ = Number(this.registerForm.value.weight_);
+    this.registerForm.value.desired_weight = Number(this.registerForm.value.desired_weight);
 
-      this.loading = true;
-      console.log(this.registerForm.value)
-      this.userService.register(this.registerForm.value)
-          .pipe(first())
-          .subscribe(
-              data => {
-                  this.alertService.success('Пользователь зарегистрирован', true);
-                  this.router.navigate(['/login']);
-              });
-  }
+    if (this.registerForm.value.program == 'lite'){
+      this.registerForm.value.program = Number(1);
+    } else {
+      this.registerForm.value.program = Number(2);
+    }
+    console.log(this.registerForm.value)
+      this.userService.addUser(this.registerForm.value).subscribe(data => {
+        this.router.navigate(['']);
+      });
+    }
 }
