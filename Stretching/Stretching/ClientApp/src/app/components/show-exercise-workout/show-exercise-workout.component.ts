@@ -25,6 +25,8 @@ export class ShowExerciseWorkoutComponent implements OnInit, OnDestroy {
   public workoutFinished = false;
   public timer_s: number;
   interval;
+  fullpath ='https://dm3yxr1fx7bnn.cloudfront.net/exercise/video/';
+  cameraSrc = "";
   constructor(private route: ActivatedRoute, private service: WorkoutsService, private _router: Router, private userService: UserService) {
 
     this.route.params.pipe(takeUntil(this.destroy$)).subscribe(() => { try { clearInterval(this.interval); } catch { } this.getElements() })
@@ -45,6 +47,7 @@ export class ShowExerciseWorkoutComponent implements OnInit, OnDestroy {
         this.currentExercise = data
         console.log(data)
         console.log(this.currentExercise.repeats)
+        this.cameraSrc = this.fullpath + data.video_url
         this.timer_s = Number(this.currentExercise.repeats);
 
         this.interval = setInterval(() => this.counterTimer(), 1000)
@@ -53,9 +56,12 @@ export class ShowExerciseWorkoutComponent implements OnInit, OnDestroy {
     this.service.getLastSequenceNumber(this.day, this.program)
       .subscribe(
         data => {
-          if (data == this.sequence) {
+          if (data - 1 == this.sequence) {
             this.workoutFinished = true
-          } else { this.workoutFinished = false }
+            console.log(data)
+          } else { this.workoutFinished = false
+            console.log('here---' + data)
+          }
         });
   }
 

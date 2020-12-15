@@ -1,17 +1,16 @@
 <app-nav-user-menu></app-nav-user-menu>
 <div class="show-exercise-container" *ngIf="currentExercise">
-     <div class="exercise-name">Name of exercise</div>
-     <video controls>
-          <source src=""
-               type="video/mp4">
+     <div class="exercise-name">{{currentExercise.name}}</div>
+     <video [src]="cameraSrc" controls>
+          <!-- <source controls type="video/mp4"> -->
           Your browser does not support the video tag.
      </video>
 
      <div class="dayly-workout-loadder">
           <div class="loadder-time">{{timer_s}}</div>
      </div>
-     <div class="exercise-description">Name of exercise Name of exercise Name of exerciseName of exerciseName of exerciseName of exerciseName
-           of exerciseName of exerciseName of exerciseName of exercise</div>
+     <div class="exercise-description">{{currentExercise.description}}</div>
      <button style="margin: 10px; background-color: #6864cb; border-color: #6864cb;" class="btn btn-success"
           (click)="getNext()">Следующее упражнение</button>
 </div>
+ng-src="{{src}} controls

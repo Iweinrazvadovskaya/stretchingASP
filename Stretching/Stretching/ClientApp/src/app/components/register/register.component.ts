@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 import { AlertService } from 'src/app/services/alert.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserService } from 'src/app/services/user.service';
+import { Md5 } from 'ts-md5';
 
 @Component({
   selector: 'app-register',
@@ -46,9 +47,12 @@ export class RegisterComponent implements OnInit {
   get f() { return this.registerForm.controls; }
 
   onSubmit() {
+
+    const md5 = new Md5();
     this.registerForm.value.height = Number(this.registerForm.value.height);
     this.registerForm.value.weight_ = Number(this.registerForm.value.weight_);
     this.registerForm.value.desired_weight = Number(this.registerForm.value.desired_weight);
+    // this.registerForm.value.user_password = String(md5.appendStr(this.registerForm.value.user_password).end());
 
     if (this.registerForm.value.program == 'lite'){
       this.registerForm.value.program = Number(1);

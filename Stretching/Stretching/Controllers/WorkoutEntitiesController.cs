@@ -104,35 +104,46 @@ namespace Stretching.Controllers
         [HttpGet("exercise")]
         public string getWorkoutExerciseByProgramDaySequence(int program, int day, int sequence)
         {
-            var res = _context.workout_entity
-                  .Join(_context.stretching_exercise,
-                      w => w.exercise_id,
-                      e => e.id,
-                      (w, e) => new { w, e })
-                  .Join(_context.exercise_translation_entity,
-                      w => w.e.id, tr => tr.parent_id, (w, tr) => new { w.e, w.w, tr })
-                  .Join(_context.stretching_program,
-                  w => w.w.program_id, pr => pr.p_id, (w, pr) => new { w.w, w.e, w.tr, pr })
-                  .Select(
-                   workout_exercise => new
-                   {
-                       day = workout_exercise.w.day,
-                       sequence = workout_exercise.w.sequence,
-                       time = workout_exercise.w.repeats,
-                       preview_url = workout_exercise.e.preview_url,
-                       exercise_id = workout_exercise.w.exercise_id,
-                       video_url = workout_exercise.e.video_url,
-                       short_name = workout_exercise.e.short_name,
-                       name = workout_exercise.tr.name,
-                       language = workout_exercise.tr.lang,
-                       description = workout_exercise.tr.description,
-                       program_name = workout_exercise.pr.program_name,
-                       program_id = workout_exercise.pr.p_id,
-                       repeats = workout_exercise.w.repeats
-                   }
-                  ).Where(o => o.program_id == program && o.day == day && o.language == "ru" && o.sequence == sequence).OrderBy(o => o.sequence);
-
-            var element = JsonConvert.SerializeObject(res.First());
+            int a = 0;
+            string element = "";
+            while (a == 0) {
+                var res = _context.workout_entity
+                      .Join(_context.stretching_exercise,
+                          w => w.exercise_id,
+                          e => e.id,
+                          (w, e) => new { w, e })
+                      .Join(_context.exercise_translation_entity,
+                          w => w.e.id, tr => tr.parent_id, (w, tr) => new { w.e, w.w, tr })
+                      .Join(_context.stretching_program,
+                      w => w.w.program_id, pr => pr.p_id, (w, pr) => new { w.w, w.e, w.tr, pr })
+                      .Select(
+                       workout_exercise => new
+                       {
+                           day = workout_exercise.w.day,
+                           sequence = workout_exercise.w.sequence,
+                           time = workout_exercise.w.repeats,
+                           preview_url = workout_exercise.e.preview_url,
+                           exercise_id = workout_exercise.w.exercise_id,
+                           video_url = workout_exercise.e.video_url,
+                           short_name = workout_exercise.e.short_name,
+                           name = workout_exercise.tr.name,
+                           language = workout_exercise.tr.lang,
+                           description = workout_exercise.tr.description,
+                           program_name = workout_exercise.pr.program_name,
+                           program_id = workout_exercise.pr.p_id,
+                           repeats = workout_exercise.w.repeats
+                       }
+                      ).Where(o => o.program_id == program && o.day == day && o.language == "ru" && o.sequence == sequence).OrderBy(o => o.sequence);
+                if (res.Count() != 0)
+                {
+                    a = 1;
+                    element = JsonConvert.SerializeObject(res.First());
+                }
+                else
+                {
+                    sequence += 1;
+                }
+            }
             return element;
         }
 
