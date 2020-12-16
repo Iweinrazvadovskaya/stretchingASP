@@ -65,21 +65,12 @@ namespace Stretching.Controllers
 
         // GET: api/Exercises/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ExerciseTranslatioDto>> GetExercise(int id)
+        public ExerciseTranslatioDto GetExercise(int id)
         {
-            var exercise = await _context.stretching_exercise.FindAsync(id);
+            var exercise = _context.stretching_exercise.Find(id);
 
-            if (exercise == null)
-            {
-                return NotFound();
-            }
 
-            ExerciseTranslation translation = await _context.exercise_translation_entity.FirstOrDefaultAsync(i => i.parent_id == exercise.id);
-
-            if (exercise == null)
-            {
-                return NotFound();
-            }
+            ExerciseTranslation translation =  _context.exercise_translation_entity.FirstOrDefault(i => i.parent_id == exercise.id);
 
             var newExercise = new ExerciseTranslatioDto() { id = id, preview_url = exercise.preview_url, short_name = exercise.short_name, video_url = exercise.video_url, description = translation.description, lang = translation.lang, name = translation.name  };
 

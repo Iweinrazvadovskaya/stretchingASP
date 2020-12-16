@@ -1,0 +1,47 @@
+.dayly-workout-container{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5rem;
+  flex-direction: column;
+}
+.exercise-name{
+  font-size: 2rem;
+}
+
+.dayly-workout-startbutton{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width:350px;
+  height: 350px;
+}
+.loadder-time{
+  font-size: 5rem;
+  animation: 1s anim infinite;
+}
+@keyframes anim{
+  50%{
+    transform: scale(1.5);
+  }
+}
+.ready{
+  font-size: 2rem;
+  color:#2f2e49;
+  margin: 2rem;
+}
+.show-exercise-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.show-exercise-container video{
+  width: 1200;
+  height: 800;
+  margin: 2rem;
+}
+.exercise-description{
+    width: 50%;
+    margin: 2rem;
+}

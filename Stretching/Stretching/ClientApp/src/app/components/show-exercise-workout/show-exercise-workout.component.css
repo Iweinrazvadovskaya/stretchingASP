@@ -1,71 +1,3 @@
-/* .spinner {
-  position: absolute;
-  z-index: 99;
-  vertical-align: middle;
-  transform: position(-50%, -50%)
-}
-
-.block-2 {
-  width: 100%;
-  font-size: 190px;
-  color: blueviolet;
-  z-index: 100;
-  vertical-align: middle;
-}
-
-span.red {
-  background: #6864cb;
-   border-radius: 0.8em;
-  -moz-border-radius: 0.8em;
-  -webkit-border-radius: 0.8em;
-  color: #ffffff;
-  display: inline-block;
-  font-weight: bold;
-  line-height: 1.6em;
-  margin-right: 15px;
-  text-align: center;
-  width: 1.6em;
-} */
-
-/* .container1{
-  width: 50%;
-  height: 50%;
-  transform: position(-50%, -50%)
-} */
-/* .block-1 {
-  width: 350px;
-  height: 350px;
-} */
-
-/* .block-2 {
-  position: absolute;
-  font-size: 70px;
-  width: 250px;
-  height: 250px;
-  z-index: 2;
-
-}
-
-.outer-div {
-  position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-  z-index: 13;
-
-  /*
-   * Setting all four values to 0 makes the element as big
-   * as its next relative parent. Usually this is the viewport.
-   */
-/* }
-
-.inner-div {
-  margin: 0 auto;
-  width: 400px;
-  background-color: khaki;
-} */
-
 .dayly-workout-container{
     display:flex;
     align-items: center;
@@ -74,7 +6,7 @@ span.red {
     flex-direction: column;
   }
   .exercise-name{
-    font-size: 1.7rem;
+    font-size: 2rem;
   }
   .dayly-workout-day-number{
     font-size: 3rem;
@@ -87,8 +19,8 @@ span.red {
     justify-content: center;
     font-size: 4rem;
     color:#2f2e49;
-    width:350px;
-    height: 350px;
+    width:250px;
+    height: 250px;
     border-radius: 50%;
     border: 10px solid #6864cb;
     cursor: pointer;
@@ -122,8 +54,8 @@ span.red {
     justify-content: center;
   }
   .show-exercise-container video{
-    width: 450px;
-    height: 300px;
+    width: 675;
+    height: 450;
     margin: 2rem;
   }
   .exercise-description{

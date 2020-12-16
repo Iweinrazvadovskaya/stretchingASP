@@ -8,9 +8,8 @@ import { ExerciseService } from 'src/app/services/exercise.service';
   styleUrls: ['./show-exercise.component.css']
 })
 export class ShowExerciseComponent implements OnInit {
-
   exerciseId: number;
-  exercise: Exercise;
+  exercise: ExerciseTranslation;
   constructor(private route: ActivatedRoute, private service: ExerciseService, private _router: Router) {
 
    }
@@ -20,9 +19,12 @@ export class ShowExerciseComponent implements OnInit {
   }
 
   getParams() {
-    this.exerciseId = +this.route.snapshot.paramMap.get('exerciseId');
+    this.exerciseId = +Number(this.route.snapshot.paramMap.get('exerciseId'));
     this.service.getExercisesById(this.exerciseId)
-    .subscribe(data => this.exercise = data);
+    .subscribe(data => {
+      this.exercise = data
+      console.log(data)
+    });
 
     console.log(this.exercise);
   }

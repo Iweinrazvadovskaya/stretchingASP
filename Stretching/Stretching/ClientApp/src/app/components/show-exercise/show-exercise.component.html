@@ -2,56 +2,14 @@
 
 <p *ngIf="!exercise"><b>Loading...</b></p>
 
-<div class="container">
+<div class="show-exercise-container" *ngIf="exercise">
+     <div class="exercise-name">{{exercise.name}}</div>
+     <video width="300" height="180" controls>
+      <source src="{{'https://dm3yxr1fx7bnn.cloudfront.net/exercise/video/' + exercise.video_url}}"
+          type="video/mp4">
+      Your browser does not support the video tag.
+  </video>
 
-    <div class="main-content" *ngIf="exercise">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-header card-header-danger">
-                            <h4 class="card-title">Профиль</h4>
-                        </div>
-                        <div class="card-body">
-                            <form>
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <label style="margin: 20px;">Вес:</label>
-
-                                    </div>
-
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label style="margin: 20px;">Рост:</label>
-
-                                    </div>
-
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <video width="100%" height="100%" controls>
-                                            <source
-                                                src="{{'https://dm3yxr1fx7bnn.cloudfront.net/exercise/video/' + exercise.video_url}}"
-                                                type="video/mp4">
-                                            Your browser does not support the video tag.
-                                        </video>
-                                    </div>
-                                </div>
-
-                                <button style="margin: 10px; background-color: #6864cb; border-color: #6864cb;"
-                                    class="btn btn-success" type="submit">Обновить вес</button>
-
-                                <div class="clearfix"></div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-
-                </div>
-            </div>
-        </div>
-    </div>
+     <div class="exercise-description">{{exercise.description}}</div>
 
 </div>
