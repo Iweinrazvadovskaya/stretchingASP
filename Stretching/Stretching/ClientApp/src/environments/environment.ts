@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
+  production: true,
   // authApi: 'http://localhost:44391/',
   // storeApi: 'http://localhost:44391/'
   tokenWhiteListedDomains: ['localhost:44391']

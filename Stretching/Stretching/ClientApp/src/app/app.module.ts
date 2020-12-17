@@ -82,12 +82,6 @@ export function tokenGetter() {
     MatProgressSpinnerModule,
     ReactiveFormsModule,
 
-    JwtModule.forRoot({
-      config: {
-        tokenGetter,
-        allowedDomains: environment.tokenWhiteListedDomains,
-      }
-    }),
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
       { path: 'register', component: RegisterComponent },
@@ -113,7 +107,13 @@ export function tokenGetter() {
       { path: 'new-day/:program/:lastDay', component: NewDayComponent }
     ]),
     BrowserAnimationsModule,
-    MatSelectModule
+    MatSelectModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+        allowedDomains: environment.tokenWhiteListedDomains,
+      }
+    }),
   ],
   providers: [ExerciseService,
     {

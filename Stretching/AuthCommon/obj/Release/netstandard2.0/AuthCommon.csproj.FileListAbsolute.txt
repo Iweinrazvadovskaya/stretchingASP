@@ -1,0 +1,9 @@
+D:\stretchingASP\Stretching\AuthCommon\bin\Release\netstandard2.0\AuthCommon.deps.json
+D:\stretchingASP\Stretching\AuthCommon\bin\Release\netstandard2.0\AuthCommon.dll
+D:\stretchingASP\Stretching\AuthCommon\bin\Release\netstandard2.0\AuthCommon.pdb
+D:\stretchingASP\Stretching\AuthCommon\obj\Release\netstandard2.0\AuthCommon.csprojAssemblyReference.cache
+D:\stretchingASP\Stretching\AuthCommon\obj\Release\netstandard2.0\AuthCommon.AssemblyInfoInputs.cache
+D:\stretchingASP\Stretching\AuthCommon\obj\Release\netstandard2.0\AuthCommon.AssemblyInfo.cs
+D:\stretchingASP\Stretching\AuthCommon\obj\Release\netstandard2.0\AuthCommon.csproj.CoreCompileInputs.cache
+D:\stretchingASP\Stretching\AuthCommon\obj\Release\netstandard2.0\AuthCommon.dll
+D:\stretchingASP\Stretching\AuthCommon\obj\Release\netstandard2.0\AuthCommon.pdb
