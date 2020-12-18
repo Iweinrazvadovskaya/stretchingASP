@@ -5,7 +5,7 @@
         <img src="assets/images/4.png" alt="">
     </div>
     <div class="login-page-container">
-        <div class="form-header">Alredy have a account? <a [routerLink]="['']">Sign Now</a></div>
+        <div class="form-header">Уже зарегистрированы? <a [routerLink]="['']">Войти</a></div>
         <form class="login-page-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
             <h2>Регистрация</h2>
@@ -62,9 +62,9 @@
             </div>
             <div class="form-group">
                 <button [disabled]="loading" class="sign-putton">
-                    Register
+                    Регистрировать
                 </button>
-                <a routerLink="" class="btn btn-link">Cancel</a>
+                <a routerLink="" class="btn btn-link">Отменить</a>
             </div>
         </form>
     </div>

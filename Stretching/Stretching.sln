@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stretching", "Stretching\Stretching.csproj", "{31C53965-B71C-4C2A-B74E-6779A24089BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthCommon", "AuthCommon\AuthCommon.csproj", "{0DF63F66-331F-40E8-A207-98086791DEAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthCommon", "AuthCommon\AuthCommon.csproj", "{0DF63F66-331F-40E8-A207-98086791DEAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

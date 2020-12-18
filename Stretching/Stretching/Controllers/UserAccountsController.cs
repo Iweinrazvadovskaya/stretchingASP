@@ -202,10 +202,18 @@ namespace Stretching.Controllers
         [HttpPost]
         public void PostUserAccount(UserDto userAccount)
         {
-            var user = _context.user_account.Add(new UserAccount() { user_name = userAccount.user_name, user_password = userAccount.user_password, role = userAccount.role });
+            var user = _context.user_account.Add(new UserAccount() { 
+                user_name = userAccount.user_name,
+                user_password = userAccount.user_password,
+                role = userAccount.role });
             _context.SaveChanges();
             int id = _context.user_account.Max(o => o.id);
-            _context.user_info.Add(new UserInfo() { user_id = id, height = userAccount.height, weight_ = userAccount.weight_, desired_weight = userAccount.desired_weight, program = userAccount.program });
+            _context.user_info.Add(new UserInfo() { 
+                user_id = id,
+                height = userAccount.height,
+                weight_ = userAccount.weight_,
+                desired_weight = userAccount.desired_weight,
+                program = userAccount.program });
             _context.SaveChanges();
         }
 

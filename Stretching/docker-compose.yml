@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  stretching:
+    image: ${DOCKER_REGISTRY-}stretching
+    build:
+      context: .
+      dockerfile: Stretching\Dockerfile
+
+  frontend:
+    image: ${DOCKER_REGISTRY-}stretching
+    build:
+        context: .
+        dockerfile: Stretching\ClientApp\AngularDockerfile
+    volumes:
+      - ./Stretching/ClientApp:/app
